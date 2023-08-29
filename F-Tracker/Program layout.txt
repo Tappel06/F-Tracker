@@ -1,0 +1,14 @@
+Client Server Architecture with layered architecture:	-->	1. Client(Presentation Layer)
+								   		 |
+								    		 V
+								2. Code classes(Business layer: Handles code)
+								    		 |
+								    		 V
+								3. Database(Data layer: SQL Lite)
+
+Notes:
+0. Checks if databse exists, create new database
+
+1. Security page displayed first:	1.1 Login
+					1.2 Registration
+
