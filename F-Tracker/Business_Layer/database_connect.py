@@ -196,6 +196,28 @@ class Database_Connection():
             return False
         
 
+    def get_user_record(self, username, password):
+        """Gets the user's record, and return it
+        
+            :param string username: The users' usersname
+            :param string password: The users' password
+            
+            :returns: list of the user's record details
+            
+            :rtypre: list
+        """
+        try: 
+            # Executes query
+            self.cursor.execute('''SELECT * FROM users_table
+                                WHERE Username = ? AND Password = ?''',
+                                (username, password,))
+            # Stores record into a list
+            user_list = self.cursor.fetchall()
+            return user_list
+        except Exception:
+            print("Error at \"get_user_record\"")
+
+
     def get_all_users(self):
         """Returns a list of all the users in the users_table
         
