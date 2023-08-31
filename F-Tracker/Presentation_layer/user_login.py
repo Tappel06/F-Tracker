@@ -98,7 +98,7 @@ class User_login():
             # Checks if user exist
             if self.db.user_authenticater(username, password) == True:
                 # Login the user
-                login = User_profile()
+                login = User_profile(self.db.get_user_record(username, password))
                 break
 
             # prints username or password is incorrect
