@@ -40,6 +40,9 @@ class Database_Connection():
             print("Directory \"Database\" exists.")
 
 
+    #====Create Tables section====#
+    '''This section contains all the methods that create tables'''
+
     def tables_exist(self):
         """Checks wether the \"users_table\" or \"transactions_table\" tables exist, then creates them 
         if they do not exist."""
@@ -59,6 +62,14 @@ class Database_Connection():
         except Exception:
             print("The table \"transactions_table\" does not exist")
             self.create_transactions_table()
+
+        # Checks if "income_expense_category_table" exists, the creates it if it does not exist
+        try:
+            self.cursor.execute("SELECT * FROM income_expense_category_table;")
+        # Print that 
+        except Exception:
+            print("The table \"income_expense_category_table\" does not exist")
+            self.create_income_expense_category_table()
 
 
     def create_user_table(self):
@@ -96,8 +107,8 @@ class Database_Connection():
                                 Transaction_id INT(6),
                                 User_id INT(4),
                                 Username VARCHAR(20),
-                                PRIMARY KEY(Transaction_id)
-                                );''')
+                                PRIMARY KEY(Transaction_id));
+                                ''')
             self.db.commit()
             # Prints that table created successfully
             print("The table \"transactions_table\" was created successfully")
@@ -106,6 +117,30 @@ class Database_Connection():
             self.db.rollback()
             print("The table \"transactions_table\" was not created successfully")
 
+
+    def create_income_expense_category_table(self):
+        """Creates a category table for income and expenses inside \"user_db\", then prints the process"""
+
+        # Creates income_expense_category_table
+        try:
+            # Executes query
+            self.cursor.execute('''CREATE TABLE income_expense_category_table(
+                                Category_id INT(6),
+                                User_id INT(6),
+                                Income_or_expense VARCHAR(7),
+                                Category_Title VARCHAR(20),
+                                PRIMARY KEY(Category_id));
+                                ''')
+            self.db.commit()
+            # Prints that table created successfully
+            print("The table \"income_expense_category_table\" was created successfully")
+        except Exception:
+            self.db.rollback()
+            print("The table \"income_expense_category_table\" was not created successfully")
+
+
+    #=====Users table section=====#
+    '''Contains all the methods related to the "users_table'''
 
     def user_authenticater(self, username, password):
         """Checks wether a user details match
@@ -243,7 +278,7 @@ class Database_Connection():
 
             :returns: True if the username exists
 
-            :rtype: boolean
+            :rtype: bool
         """
 
         # default boolean value
@@ -264,3 +299,83 @@ class Database_Connection():
 
         # Returns boolean value
         return username_exist
+    
+
+    #=====Category Section=====#
+    '''Contains all the methods conserning the "income_expense_category_table"'''
+
+    def create_new_expense_category(self, user_id, category_title):
+        """Creates a new expense category record in the \"income_expense_category_table\"
+        
+            :param int user_id: The user's id to who the category is related to
+            :param string category_title: The new name of the expense category
+        """
+        
+        try:
+            # Executes query
+            self.cursor.execute('''INSERT INTO income_expense_category_table
+                                VALUES (?, ?, "Expense", ?);
+                                ''', (self.auto_assign_category_id(), user_id, category_title))
+            self.db.commit()
+            print("new expense category added")
+        except Exception:
+            self.db.rollback()
+            print("new expense category could not be added")
+
+
+    def auto_assign_category_id(self):
+        """Automaticaly assigns an id if it does not exist in the \"income_expense_category_table\"
+        
+            :returns: available id number
+
+            :rtype: int
+        """
+
+        # ID integer value starts at 0
+        id = 0
+
+        # While loop till id does not exist in table
+        while True:
+            print(id)
+            try:
+                # Executes query
+                self.cursor.execute(f"""SELECT * FROM income_expense_category_table
+                                    WHERE Category_id = ?;""", (id,))
+                # Gets list of categories
+                category_list = self.cursor.fetchall()
+                # Checks if category equals 0, then breaks loop if does exist
+                if len(category_list) == 0:
+                    # returns id
+                    return id
+                else:
+                    id += 1
+            except Exception:
+                print("Could not generate a category id")
+                break
+
+        
+    def get_all_expense_categories(self, user_id):
+        """returns all the records where categories are expenses
+
+        :param int user_id: contains the user id with what the expenses are related to
+
+        :returns: list of expense records related to the user id
+
+        :rtype: list
+        """
+        try:
+            # Executes query
+            self.cursor.execute('''SELECT * FROM income_expense_category_table
+                                WHERE User_id = ? AND 
+                                Income_or_Expense = "Expense";''',
+                                (user_id,))
+            # Stores the categorie records in alist
+            expense_category_list = self.cursor.fetchall()
+            return expense_category_list
+        except Exception:
+            print("Could not retrieve expense_category_list")
+
+    #=====Close database=====#
+    def close_database(self):
+        """Closes the database"""
+        self.db.close()
