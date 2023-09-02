@@ -365,7 +365,8 @@ class Database_Connection():
             try:
                 # Executes query
                 cursor.execute('''SELECT * FROM transactions_table
-                               WHERE User_id = ? AND Income_or_expense = "Expense";''', (user_id,))
+                               WHERE User_id = ? AND Income_or_expense = "Expense"
+                               ORDER BY yyyy_mm_dd;''', (user_id,))
                 # Gets expense list
                 expense_list = cursor.fetchall()
                 # Returns expense_list
@@ -373,6 +374,37 @@ class Database_Connection():
             
             except Exception:
                 print("Could not retrieve expense records by user id")
+
+
+    def get_all_expenses_by_user_id_and_category(self, user_id, category):
+        """Gets all expenses by user_id and category, returns a list
+        
+            :param int user_id: the user's ID
+            :param string category: the category by which list must be fetched
+
+            :returns: list of expenses by user
+
+            :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM transactions_table
+                               WHERE User_id = ? 
+                               AND Income_or_expense = "Expense"
+                               AND Category LIKE ?
+                               ORDER BY yyyy_mm_dd;''', (user_id, f"%{category}%",))
+                # Gets expense list
+                expense_list = cursor.fetchall()
+                # Returns expense_list
+                return expense_list
+            
+            except Exception:
+                print("Could not retrieve expense records by user id and category")
 
 
     def delete_expense_transaction_by_id(self, transaction_id):
@@ -454,14 +486,121 @@ class Database_Connection():
                     print("Could not generate a transaction id")
                     break
 
+
+    #=====Transaction Table Section (Income)=====#
+    '''Contains all the methods conserning the Income of transactions_table'''   
+
+    def get_all_income_by_user_id(self, user_id):
+        """Gets all income by user_id, returns a list
+        
+            :param int user_id: the user's ID
+
+            :returns: list of income by user
+
+            :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM transactions_table
+                               WHERE User_id = ? AND Income_or_expense = "Income"
+                               ORDER BY yyyy_mm_dd;''', (user_id,))
+                # Gets income list
+                income_list = cursor.fetchall()
+                # Returns income_list
+                return income_list
+            
+            except Exception:
+                print("Could not retrieve income records by user id")
+
+
+    def get_all_income_by_user_id_and_category(self, user_id, category):
+        """Gets all income by user_id and category, returns a list
+        
+            :param int user_id: the user's ID
+            :param string category: the category by which list must be fetched
+
+            :returns: list of income by user
+
+            :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM transactions_table
+                               WHERE User_id = ? 
+                               AND Income_or_expense = "Income"
+                               AND Category LIKE ?
+                               ORDER BY yyyy_mm_dd;''', (user_id, f"%{category}%",))
+                # Gets income list
+                income_list = cursor.fetchall()
+                # Returns income_list
+                return income_list
+            
+            except Exception:
+                print("Could not retrieve income records by user id and category")
+
+
+    def delete_income_transaction_by_id(self, transaction_id):
+        """Deletes income record by transaction id
+        
+            :param int transaction_id: gets the transaction id of record to be deleted
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''DELETE FROM transactions_table
+                               WHERE Transaction_id = ?;''', (transaction_id,))
+                db.commit()
+            except Exception:
+                db.rollback()
+                print("Could not delete income transaction by id")
+
+
+    def add_income_transaction_record(self, user_id, date, category, amount):
+        """Creates and adds a new transaction record in transactions_table
+        
+            :param int user_id: receives the user's id
+            :param string date: receives the date of the transaction
+            :param string category: receives the income category
+            :param float amoun: receives the amount of the income
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                cursor.execute('''INSERT INTO transactions_table
+                                VALUES (?, ?, ?, "Income", ?, ?);''',
+                                (self.auto_assign_transaction_id(), user_id, date, category, amount))
+                db.commit()
+            
+            except Exception:
+                db.rollback
+                print("Income transaction record could not be created in transactions_table")
+
+
     #=====Category table Section=====#
     '''Contains all the methods conserning the "income_expense_category_table"'''
 
-    def create_new_expense_category(self, user_id, category_title):
-        """Creates a new expense category record in the \"income_expense_category_table\"
+    def create_new_income_category(self, user_id, category_title):
+        """Creates a new income category record in the \"income_expense_category_table\"
         
             :param int user_id: The user's id to who the category is related to
-            :param string category_title: The new name of the expense category
+            :param string category_title: The new name of the income category
         """
         # Opens database
         with sqlite3.connect("Database/users_db") as db:
@@ -471,13 +610,68 @@ class Database_Connection():
             try:
                 # Executes query
                 cursor.execute('''INSERT INTO income_expense_category_table
-                                    VALUES (?, ?, "Expense", ?);
+                                    VALUES (?, ?, "Income", ?);
                                     ''', (self.auto_assign_category_id(), user_id, category_title))
                 db.commit()
-                print("new expense category added")
+                print("new income category added")
             except Exception:
                 db.rollback()
-                print("new expense category could not be added")
+                print("new income category could not be added")
+
+
+    def delete_income_category(self, category_id):
+        """Deletes a income_category from the \"income_expense_category_table\"
+        
+            :param int category_id: The id of the category to be deleted
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''DELETE FROM income_expense_category_table
+                                    WHERE Category_id = ?;
+                                    ''', (category_id,))
+                db.commit()
+                print("Income category removed")
+            except Exception:
+                db.rollback()
+                print("Income category could not be removed")
+
+    def auto_assign_category_id(self):
+        """Automaticaly assigns an id if it does not exist in the \"income_expense_category_table\"
+        
+            :returns: available id number
+
+            :rtype: int
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            # ID integer value starts at 1
+            id = 1
+
+            # While loop till id does not exist in table
+            while True:
+                try:
+                    # Executes query
+                    cursor.execute(f"""SELECT * FROM income_expense_category_table
+                                        WHERE Category_id = ?;""", (id,))
+                    # Gets list of categories
+                    category_list = cursor.fetchall()
+                    # Checks if category equals 0, then breaks loop if does exist
+                    if len(category_list) == 0:
+                        # returns id
+                        return id
+                    else:
+                        id += 1
+                except Exception:
+                    print("Could not generate a category id")
+                    break
 
 
     def delete_expense_category(self, category_id):
@@ -496,10 +690,10 @@ class Database_Connection():
                                     WHERE Category_id = ?;
                                     ''', (category_id,))
                 db.commit()
-                print("Expense category removed")
+                print("Income category removed")
             except Exception:
                 db.rollback()
-                print("Expense category could not be removed")
+                print("Income category could not be removed")
 
 
     def auto_assign_category_id(self):
@@ -535,11 +729,11 @@ class Database_Connection():
                     print("Could not generate a category id")
                     break
 
-        
-    def get_all_expense_categories(self, user_id):
-        """returns all the records where categories are expenses
 
-        :param int user_id: contains the user id with what the expenses are related to
+    def get_all_expense_categories(self, user_id):
+        """returns all the records where categories are expense
+
+        :param int user_id: contains the user id with what the expense are related to
 
         :returns: list of expense records related to the user id
 
@@ -557,7 +751,37 @@ class Database_Connection():
                                     Income_or_Expense = "Expense";''',
                                     (user_id,))
                 # Stores the categorie records in alist
-                expense_category_list = cursor.fetchall()
-                return expense_category_list
+                income_category_list = cursor.fetchall()
+                return income_category_list
             except Exception:
-                print("Could not retrieve expense_category_list")
+                print("Could not retrieve income_category_list")
+
+
+    def get_all_income_categories(self, user_id):
+        """returns all the records where categories are income
+
+        :param int user_id: contains the user id with what the income are related to
+
+        :returns: list of income records related to the user id
+
+        :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM income_expense_category_table
+                                    WHERE User_id = ? AND 
+                                    Income_or_Expense = "Income";''',
+                                    (user_id,))
+                # Stores the categorie records in alist
+                income_category_list = cursor.fetchall()
+                return income_category_list
+            except Exception:
+                print("Could not retrieve income_category_list")
+
+    
+    
