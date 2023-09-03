@@ -4,7 +4,7 @@
 '''This section contains all the imports'''
 import Presentation_layer.shared_display
 from Business_Layer.database_connect import Database_Connection
-from Presentation_layer.user_profile import User_profile
+from Presentation_layer.main_menu import Main_menu
 
 
 #=====Classes=====#
@@ -98,7 +98,8 @@ class User_login():
             # Checks if user exist
             if self.db.user_authenticater(username, password) == True:
                 # Login the user
-                login = User_profile(self.db.get_user_record(username, password))
+                login = Main_menu(self.db.get_user_record(username, password))
+                login.main_menu_options()
                 break
 
             # prints username or password is incorrect
