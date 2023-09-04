@@ -255,18 +255,19 @@ Are you sure you want to add this record? (Y/N): """)
         total_amount = 0.00
         
         print("\nAll income:\n")
-        print("\n--------------------------------------------------------------------------------")
+        print(f'''\n Transaction Id:{" " * 4}Date:{" " * 10}Category:{" " * 26}Amount:
+--------------------------------------------------------------------------------''')
         
         for income in income_list:
             # adds up the total amount of income
             total_amount += income[5]
             # Prints income
-            print(f'''Transaction ID: {income[0]},   Date: {income[2]},   Category: {income[4]},   Amount: {income[5]}
+            print(f''' {income[0]}{" " * (19 - len(str(income[0])))}{income[2]}{" " * 5}{income[4]}{" " * (35 - len(income[4]))}{income[5]}
 --------------------------------------------------------------------------------''')
             
         # prints the total income
         print(f'''================================================================================
-The total of all your income are : {total_amount}
+{" " * 56}Income Total: {total_amount}
 ================================================================================''')
             
         
@@ -318,18 +319,19 @@ The total of all your income are : {total_amount}
         total_amount = 0.00
 
         print(f"\nYour income for this category search:\n")
-        print("\n--------------------------------------------------------------------------------")
+        print(f'''\n Transaction Id:{" " * 4}Date:{" " * 10}Category:{" " * 26}Amount:
+--------------------------------------------------------------------------------''')
 
         for income in category_list:
             # adds up the total amount of income
             total_amount += income[5]
             # Prints income
-            print(f'''Transaction ID: {income[0]},   Date: {income[2]},   Category: {income[4]},   Amount: {income[5]}
+            print(f''' {income[0]}{" " * (19 - len(str(income[0])))}{income[2]}{" " * 5}{income[4]}{" " * (35 - len(income[4]))}{income[5]}
 --------------------------------------------------------------------------------''')
             
         # prints the total income
         print(f'''================================================================================
-The total of all this income are : {total_amount}
+{" " * 56}Income Total: {total_amount}
 ================================================================================''')
 
     def add_remove_income_category(self):

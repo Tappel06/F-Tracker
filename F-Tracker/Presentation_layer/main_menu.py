@@ -6,6 +6,7 @@ from Presentation_layer.user_profile import User_profile
 from Presentation_layer.expenses_menu import Expenses_menu
 from Presentation_layer.income_menu import Income_menu
 from Presentation_layer.budget_menu import Budget_menu
+from Presentation_layer.financial_goals_menu import Financial_goals_menu
 
 class Main_menu(User_profile):
     """Sub class of User_profile"""
@@ -16,6 +17,7 @@ class Main_menu(User_profile):
         self.expense_menu = Expenses_menu(user_record)
         self.income_menu = Income_menu(user_record)
         self.budget_menu = Budget_menu(user_record)
+        self.financial_goals_menu = Financial_goals_menu(user_record)
         
 
     #====Main menu methods====#
@@ -26,6 +28,8 @@ class Main_menu(User_profile):
 
         # Prints the logo
         self.logo("m")
+        # Print income and expenses
+        self.print_income_expense_totals()
         # Prints the options
         self.print_main_menu_options()
         
@@ -39,6 +43,8 @@ class Main_menu(User_profile):
                 self.expense_menu.expenses_menu_options()
                 # Prints the logo
                 self.logo("m")
+                # Print income and expenses
+                self.print_income_expense_totals()
                 # Prints the options
                 self.print_main_menu_options()
 
@@ -47,6 +53,8 @@ class Main_menu(User_profile):
                 self.income_menu.income_menu_options()
                 # Prints the logo
                 self.logo("m")
+                # Print income and expenses
+                self.print_income_expense_totals()
                 # Prints the options
                 self.print_main_menu_options()
 
@@ -55,11 +63,20 @@ class Main_menu(User_profile):
                 self.budget_menu.budget_menu_options()
                 # Prints the logo
                 self.logo("m")
+                # Print income and expenses
+                self.print_income_expense_totals()
                 # Prints the options
                 self.print_main_menu_options()
 
             # Else if option "4" selected, got to "fianacial_goals_menu_options"
             elif option == "4":
+                self.financial_goals_menu.financial_goal_menu_options()
+                # Prints the logo
+                self.logo("m")
+                # Print income and expenses
+                self.print_income_expense_totals()
+                # Prints the options
+                self.print_main_menu_options()
                 pass
 
             # Else if option "5" selected, break the loop
@@ -74,6 +91,8 @@ class Main_menu(User_profile):
             else:
                 # Prints the logo
                 self.logo("m")
+                # Print income and expenses
+                self.print_income_expense_totals()
                 print("\n***** You did not enter a given option! *****")
                 self.print_main_menu_options()
 
@@ -88,3 +107,30 @@ class Main_menu(User_profile):
 5. Logout
 6. Exit
 ''')
+        
+    def print_income_expense_totals(self):
+        """Prints the totals of income and expenses"""
+        # Total expenses
+        expenses_list = self.db.get_all_expenses_by_user_id(self.user_details[0][0])
+        income_list = self.db.get_all_income_by_user_id(self.user_details[0][0])
+
+        total_expenses = 0.00
+        total_income = 0.00
+
+        # add up all expenses
+        for expense in expenses_list:
+            total_expenses += expense[5]
+
+        # add up all income
+        for income in income_list:
+            total_income += income[5]
+
+        print(f'''
+-----------------------------------------
+| Total Income: {total_income}{" " * (24 - len(str(total_income)))}|
+| Total Expenses: {total_expenses}{" " * (22 - len(str(total_expenses)))}|
+|---------------------------------------|
+| Balance: {total_income - total_expenses}{" " * (29 - len(str(total_income - total_expenses)))}|
+=========================================
+''')
+        

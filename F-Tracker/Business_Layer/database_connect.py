@@ -60,6 +60,14 @@ class Database_Connection():
                 print("The table \"transactions_table\" does not exist")
                 self.create_transactions_table()
 
+            # Checks if "income_expense_category_table" exists, the creates it if it does not exist
+            try:
+                cursor.execute("SELECT * FROM income_expense_category_table;")
+            # Print that 
+            except Exception:
+                print("The table \"income_expense_category_table\" does not exist")
+                self.create_income_expense_category_table()
+
             # Checks if budget_table exists
             try:
                 cursor.execute("SELECT * FROM budget_table;")
@@ -68,13 +76,13 @@ class Database_Connection():
                 print("The table \"budget_table\" does not exist")
                 self.create_budget_table()
 
-            # Checks if "income_expense_category_table" exists, the creates it if it does not exist
+            # Checks if "financial_goal_category_table" exists, the creates it if it does not exist
             try:
-                cursor.execute("SELECT * FROM income_expense_category_table;")
+                cursor.execute("SELECT * FROM financial_goals_table;")
             # Print that 
             except Exception:
-                print("The table \"income_expense_category_table\" does not exist")
-                self.create_income_expense_category_table()
+                print("The table \"financial_goals_category_table\" does not exist")
+                self.create_financial_goals_table()
 
 
     def create_user_table(self):
@@ -136,6 +144,32 @@ class Database_Connection():
                 print("The table \"transactions_table\" was not created successfully")
 
 
+    def create_income_expense_category_table(self):
+        """Creates a category table for income and expenses inside \"user_db\", then prints the process"""
+
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            # Creates income_expense_category_table
+            try:
+                # Executes query
+                cursor.execute('''CREATE TABLE income_expense_category_table(
+                                Category_id INT(6),
+                                User_id INT(6),
+                                Income_or_expense VARCHAR(7),
+                                Category_Title VARCHAR(20),
+                                PRIMARY KEY(Category_id));
+                                ''')
+                db.commit()
+                # Prints that table created successfully
+                print("The table \"income_expense_category_table\" was created successfully")
+            except Exception:
+                db.rollback()
+                print("The table \"income_expense_category_table\" was not created successfully")
+
+
     def create_budget_table(self):
         """Creates a budget table inside \"user_db\", then prints out the process"""
 
@@ -162,30 +196,30 @@ class Database_Connection():
                 print("The table \"budget_table\" was not created successfully")
 
 
-    def create_income_expense_category_table(self):
-        """Creates a category table for income and expenses inside \"user_db\", then prints the process"""
+    def create_financial_goals_table(self):
+        """Creates a financial goals table inside \"user_db\", then prints out the process"""
 
         # Opens database
         with sqlite3.connect("Database/users_db") as db:
             # Creates cursor
             cursor = db.cursor()
 
-            # Creates income_expense_category_table
+            # Creates transactions table
             try:
-                # Executes query
-                cursor.execute('''CREATE TABLE income_expense_category_table(
-                                Category_id INT(6),
-                                User_id INT(6),
-                                Income_or_expense VARCHAR(7),
-                                Category_Title VARCHAR(20),
-                                PRIMARY KEY(Category_id));
+                cursor.execute('''CREATE TABLE financial_goals_table(
+                                Goal_id INT(6),
+                                User_id INT(4),
+                                Category VARCHAR(20),
+                                Total DECIMAL(20,2),
+                                PRIMARY KEY(Goal_id));
                                 ''')
                 db.commit()
                 # Prints that table created successfully
-                print("The table \"income_expense_category_table\" was created successfully")
+                print("The table \"financial_goals_table\" was created successfully")
+            # Prints that the table could not be created
             except Exception:
                 db.rollback()
-                print("The table \"income_expense_category_table\" was not created successfully")
+                print("The table \"financial_goals_table\" was not created successfully")
 
 
     #=====Users table section=====#
@@ -751,6 +785,29 @@ class Database_Connection():
                 print("Income category could not be removed")
 
 
+    def delete_expense_category_by_category(self, category):
+        """Deletes a expense_category from the \"income_expense_category_table\"
+        
+            :param int category_id: The id of the category to be deleted
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''DELETE FROM income_expense_category_table
+                                    WHERE Category_Title = ?
+                                    AND Income_or_expense = "Expense";
+                                    ''', (category,))
+                db.commit()
+                print("Expense category removed")
+            except Exception:
+                db.rollback()
+                print("Expense category could not be removed")
+
+
     def auto_assign_category_id(self):
         """Automaticaly assigns an id if it does not exist in the \"income_expense_category_table\"
         
@@ -810,6 +867,55 @@ class Database_Connection():
                 return income_category_list
             except Exception:
                 print("Could not retrieve income_category_list")
+
+
+    def get_a_expense_categories(self, user_id, category):
+        """returns all the records where specific category and id
+
+        :param int user_id: contains the user id with what the expense are related to
+        :param string category: uses category of expense
+
+        :returns: list of expense records related to the user id and category
+
+        :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM income_expense_category_table
+                                    WHERE User_id = ? AND 
+                                    Income_or_expense = "Expense"
+                                    AND Category_Title = ?;''',
+                                    (user_id, category,))
+                # Stores the categorie records in alist
+                expense_category_list = cursor.fetchall()
+                return expense_category_list
+            except Exception:
+                print("Could not retrieve expense_category_list")
+
+
+    def expense_category_exists(self, user_id, category):
+        """Checks wether a specific expense caegory exists
+        
+            :param int user_id: uses the user's id
+            :param string categor: uses the category to check if it exists
+
+            :returns: True if category exists, False if not
+
+            :rtype: bool
+        """
+        # gets list
+        list = self.get_a_expense_categories(user_id, category)
+
+        # checks if list is more than 0, return True if so.
+        if len(list) > 0:
+            return True
+        else:
+            return False
 
 
     def get_all_income_categories(self, user_id):
@@ -1061,3 +1167,210 @@ class Database_Connection():
             
             except Exception:
                 print("Could not retrieve budget records by user id and category")
+
+
+    #=====Financial Goals Table Section=====#
+    '''This section contains all the methods related to the budget_table'''
+
+    def financial_goal_category_exists(self, category, user_id):
+        """Checks wether a financial goal category exists, return true if it does exist
+        
+            :param string category: the category that needs to be searched
+            :param int user_id: gets the user id
+
+            :returns: True if category exists, return False if not
+
+            :rtype: bool
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates query
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM financial_goals_table
+                                WHERE Category = ? 
+                                AND User_id = ?;''',(category, user_id))
+                # Gets list
+                category_list = cursor.fetchall()
+                # Returns True if category_list's length more than 0, else false
+                if len(category_list) > 0:
+                    return True
+                else:
+                    return False
+                
+            except Exception:
+                print("Could not determine if category exists in financial_goals_table")
+
+    
+    def add_financial_goals_record_and_maybe_expense_record(self, user_id, category, goal_amount):
+        """Adds a budget category to the budget_table, and maybe to expense category table if it does
+            not exist.
+        
+            :param int user_id: Takes the user id
+            :param string category: takes the category of the expense
+            :param float goal_amount: takes the total amount of the financial goal
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''INSERT INTO financial_goals_table
+                                VALUES (?, ?, ?, ?);''', 
+                                (self.auto_assign_goal_id(), user_id, category, goal_amount,))
+                db.commit()
+
+                # If category does not exist in expenses, create it
+                if self.expense_category_exists(user_id, category) == False:
+                    self.create_new_expense_category(user_id, category)
+            
+            except Exception:
+                db.rollback()
+                print("Could not add new financial goal record")
+
+            
+    def update_financial_goal_record(self, user_id, category, goal_amount):
+        """Adds a budget category to the budget_table
+        
+            :param int user_id: Takes the user id
+            :param string category: takes the category of the goal
+            :param float budget_amount: takes the total amount of the goal
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''UPDATE financial_goals_table
+                                SET Total = ?
+                                WHERE User_id = ?
+                                AND Category = ?;''', 
+                                (goal_amount, user_id, category,))
+                db.commit()
+            
+            except Exception:
+                db.rollback()
+                print("Could not update financial goal record")
+                
+    
+    def get_all_financial_goals_by_id(self, user_id):
+        """Gets all the financial goal records by user
+        
+            :param int user_id: uses the user's id
+
+            :returns: list of financial goal records of the user
+
+            :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM financial_goals_table
+                                WHERE User_id = ?''', (user_id,))
+                # Gets list
+                goal_list = cursor.fetchall()
+                # Returns list
+                return goal_list
+            
+            except Exception:
+                print("Could not return a list from budget_table")
+
+
+    def delete_financial_goal_record_by_category_and_user_id(self, user_id, category):
+        """Removes a record from the budget_table and income_expense_category_table 
+            with the user id and category details
+        
+            :param int user_id: uses user's id
+            :param string category: uses category of the budget
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor =db.cursor()
+
+            try:
+                # Executes query for budget table
+                cursor.execute('''DELETE FROM financial_goals_table
+                               WHERE User_id = ?
+                               AND Category = ?;''', (user_id, category,))
+                # Commits
+                db.commit()
+                self.delete_expense_category_by_category(category)
+
+            except Exception:
+                db.rollback()
+                print("Could not delete record from budget_table and income_expense_category_table")
+
+
+
+    def auto_assign_goal_id(self):
+        """Automaticaly assigns an id if it does not exist in the \"financial_goals_table\"
+        
+            :returns: available id number
+
+            :rtype: int
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            # ID integer value starts at 1
+            id = 1
+
+            # While loop till id does not exist in table
+            while True:
+                try:
+                    # Executes query
+                    cursor.execute(f"""SELECT * FROM financial_goals_table
+                                        WHERE Goal_id = ?;""", (id,))
+                    # Gets list of categories
+                    goal_list = cursor.fetchall()
+                    # Checks if goal id equals 0, then breaks loop if does exist
+                    if len(goal_list) == 0:
+                        # returns id
+                        return id
+                    else:
+                        id += 1
+                except Exception:
+                    print("Could not generate a goal id")
+                    break
+
+
+    def search_all_financial_goals_by_user_id_and_category(self, user_id, category):
+        """Gets all financial_goal records by user_id and category, returns a list
+        
+            :param int user_id: the user's ID
+            :param string category: the category by which list must be fetched
+
+            :returns: list of financial_goals by user id and category
+
+            :rtype: list
+        """
+        # Opens database
+        with sqlite3.connect("Database/users_db") as db:
+            # Creates cursor
+            cursor = db.cursor()
+
+            try:
+                # Executes query
+                cursor.execute('''SELECT * FROM financial_goals_table
+                               WHERE User_id = ? 
+                               AND Category LIKE ?;''', (user_id, f"%{category}%",))
+                # Gets fiancial goal list
+                goal_list = cursor.fetchall()
+                # Returns goal_list
+                return goal_list
+            
+            except Exception:
+                print("Could not retrieve financial goal records by user id and category")

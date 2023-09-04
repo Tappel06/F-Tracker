@@ -55,6 +55,11 @@ User ID: {self.user_details[0][0]}
             print('''||  Budget Menu  ||
 ===================''')
             
+        # If menu equals "f" print "Financial Goals Menu"
+        elif menu_type == "f":
+            print('''||  Financial Goals Menu  ||
+============================''')
+            
 
     def date_string_creator(self):
         """Turns a user's input into a date in string format

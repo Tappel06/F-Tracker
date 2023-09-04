@@ -86,8 +86,9 @@ class Budget_menu(User_profile):
         # Gets budget list
         budget_list = self.db.get_all_budget_by_id(self.user_details[0][0])
 
-        print("\nYour current budget and their expenses:")
-        print("--------------------------------------------------------------------------------")
+        print("\nYour current budget and their expenses:\n")
+        print(f''' Category{" " * 26}Current Expense:{" " * 15}Expense Budget
+--------------------------------------------------------------------------------''')
         
         # Total expense of expenses
         expense_total = 0.00
@@ -107,11 +108,11 @@ class Budget_menu(User_profile):
             budget_total += budget[3]
 
             # Prints budget
-            print(f'''Current {budget[2]} expense: {sum[0]}{" " * (20 - ((len(budget[2]) + len(str(sum[0])))))}{budget[2]} budget: {budget[3]}''')
+            print(f''' {budget[2]}{" " * (34 - len(budget[2]))}{sum[0]}{" " * (31 - len(str(sum[0])))}{budget[3]}''')
     
         # prints total of expenses and budget
         print(f'''--------------------------------------------------------------------------------
-Total expenses: {expense_total}{" " * (22 - len(str(expense_total)))}Budget total: {budget_total}   
+{" " * 19}Total expenses: {expense_total}{" " * 10}Budget total: {budget_total}   
 ================================================================================''')
 
 
@@ -269,8 +270,9 @@ Total expenses: {expense_total}{" " * (22 - len(str(expense_total)))}Budget tota
         # Gets budget list
         budget_list = self.db.get_all_budget_by_user_id_and_category(self.user_details[0][0], category_search)
 
-        print("\nYour current budget and their expenses:")
-        print("--------------------------------------------------------------------------------")
+        print("\nYour current budget and their expenses:\n")
+        print(f''' Category{" " * 26}Current Expense:{" " * 15}Expense Budget
+--------------------------------------------------------------------------------''')
         
         # Total expense of expenses
         expense_total = 0.00
@@ -290,9 +292,9 @@ Total expenses: {expense_total}{" " * (22 - len(str(expense_total)))}Budget tota
             budget_total += budget[3]
 
             # Prints budget
-            print(f'''Current {budget[2]} expense: {sum[0]}{" " * (20 - ((len(budget[2]) + len(str(sum[0])))))}{budget[2]} budget: {budget[3]}''')
+            print(f''' {budget[2]}{" " * (34 - len(budget[2]))}{sum[0]}{" " * (31 - len(str(sum[0])))}{budget[3]}''')
     
         # prints total of expenses and budget
         print(f'''--------------------------------------------------------------------------------
-Total expenses: {expense_total}{" " * (22 - len(str(expense_total)))}Budget total: {budget_total}   
+{" " * 19}Total expenses: {expense_total}{" " * 10}Budget total: {budget_total}   
 ================================================================================''')

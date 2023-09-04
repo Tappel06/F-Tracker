@@ -255,18 +255,19 @@ Are you sure you want to add this record? (Y/N): """)
         total_amount = 0.00
         
         print("\nAll Expenses:\n")
-        print("\n--------------------------------------------------------------------------------")
+        print(f'''\n Transaction Id:{" " * 4}Date:{" " * 10}Category:{" " * 26}Amount:
+--------------------------------------------------------------------------------''')
         
         for expense in expense_list:
             # adds up the total amount of expenses
             total_amount += expense[5]
             # Prints Expenses
-            print(f'''Transaction ID: {expense[0]},   Date: {expense[2]},   Category: {expense[4]},   Amount: {expense[5]}
+            print(f''' {expense[0]}{" " * (19 - len(str(expense[0])))}{expense[2]}{" " * 5}{expense[4]}{" " * (35 - len(expense[4]))}{expense[5]}
 --------------------------------------------------------------------------------''')
             
         # prints the total expenses
         print(f'''================================================================================
-The total of all your expenses are : {total_amount}
+{" " * 55}Expense Total: {total_amount}
 ================================================================================''')
             
         
@@ -318,18 +319,19 @@ The total of all your expenses are : {total_amount}
         total_amount = 0.00
 
         print(f"\nYour Expenses for this category search:\n")
-        print("\n--------------------------------------------------------------------------------")
+        print(f'''\n Transaction Id:{" " * 4}Date:{" " * 10}Category:{" " * 26}Amount:
+--------------------------------------------------------------------------------''')
 
         for expense in category_list:
             # adds up the total amount of expenses
             total_amount += expense[5]
             # Prints Expenses
-            print(f'''Transaction ID: {expense[0]},   Date: {expense[2]},   Category: {expense[4]},   Amount: {expense[5]}
+            print(f''' {expense[0]}{" " * (19 - len(str(expense[0])))}{expense[2]}{" " * 5}{expense[4]}{" " * (35 - len(expense[4]))}{expense[5]}
 --------------------------------------------------------------------------------''')
             
         # prints the total expenses
         print(f'''================================================================================
-The total of all this expenses are : {total_amount}
+{" " * 55}Expense Total: {total_amount}
 ================================================================================''')
 
     def add_remove_expense_category(self):
