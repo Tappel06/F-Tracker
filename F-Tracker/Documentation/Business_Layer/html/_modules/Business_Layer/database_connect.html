@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business_Layer.database_connect &mdash; F-Tracker 01.00.00 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=6386319a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            F-Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Business_Layer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">F-Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Business_Layer.database_connect</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Business_Layer.database_connect</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;This file contains the class for connecting to the programs\&#39; database, or checks wether the</span>
+<span class="sd">databse exists&#39;&#39;&#39;</span>
+
+<span class="c1">#=====Imports=====#</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<div class="viewcode-block" id="Database_Connection">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection">[docs]</a>
+<span class="k">class</span> <span class="nc">Database_Connection</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the constructor&quot;&quot;&quot;</span>
+
+        <span class="c1"># Checks if directory exists.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_exists</span><span class="p">()</span>
+        <span class="c1"># Checks and create tables if needed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tables_exist</span><span class="p">()</span>
+        
+
+<div class="viewcode-block" id="Database_Connection.path_exists">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.path_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">path_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a path exists, and creates a new one if it does not exist&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Prints that it is checking for directory path existance</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking if </span><span class="se">\&quot;</span><span class="s2">Database</span><span class="se">\&quot;</span><span class="s2"> directory exists...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prints that the path does not exist, then creates it, then prints it is created.</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;Database&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The directory </span><span class="se">\&quot;</span><span class="s2">Database</span><span class="se">\&quot;</span><span class="s2"> does not exist, creating directory...&quot;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mkdir Database&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database directory </span><span class="se">\&quot;</span><span class="s2">Database</span><span class="se">\&quot;</span><span class="s2"> created successfully.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prints that the directory exists</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Directory </span><span class="se">\&quot;</span><span class="s2">Database</span><span class="se">\&quot;</span><span class="s2"> exists.&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#====Create Tables section====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This section contains all the methods that create tables&#39;&#39;&#39;</span>
+    
+<div class="viewcode-block" id="Database_Connection.tables_exist">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.tables_exist">[docs]</a>
+    <span class="k">def</span> <span class="nf">tables_exist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether the \&quot;users_table\&quot; or \&quot;transactions_table\&quot; tables exist, then creates them </span>
+<span class="sd">        if they do not exist.&quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Checks if user_table exist, then creates it if it does not exist</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users_table;&quot;</span><span class="p">)</span>
+            <span class="c1"># Prints that the user table does not exist, and then creates it</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">users_table</span><span class="se">\&quot;</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_user_table</span><span class="p">()</span>
+
+            <span class="c1"># Checks if transactions_table exists, then creates it if it does not exist</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM transactions_table;&quot;</span><span class="p">)</span>
+            <span class="c1"># Print that </span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">transactions_table</span><span class="se">\&quot;</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_transactions_table</span><span class="p">()</span>
+
+            <span class="c1"># Checks if &quot;income_expense_category_table&quot; exists, the creates it if it does not exist</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM income_expense_category_table;&quot;</span><span class="p">)</span>
+            <span class="c1"># Print that </span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">income_expense_category_table</span><span class="se">\&quot;</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_income_expense_category_table</span><span class="p">()</span>
+
+            <span class="c1"># Checks if budget_table exists</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM budget_table;&quot;</span><span class="p">)</span>
+            <span class="c1"># Print that </span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">budget_table</span><span class="se">\&quot;</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_budget_table</span><span class="p">()</span>
+
+            <span class="c1"># Checks if &quot;financial_goal_category_table&quot; exists, the creates it if it does not exist</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM financial_goals_table;&quot;</span><span class="p">)</span>
+            <span class="c1"># Print that </span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">financial_goals_category_table</span><span class="se">\&quot;</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">create_financial_goals_table</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.create_user_table">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_user_table">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_user_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a user table inside \&quot;user_db\&quot;, then prints out the process&quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Prints creating user table</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating </span><span class="se">\&quot;</span><span class="s2">users_table</span><span class="se">\&quot;</span><span class="s2"> table.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Creates user Table</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                                CREATE TABLE users_table(</span>
+<span class="s1">                                User_id INT(4),</span>
+<span class="s1">                                Username VARCHAR(20),</span>
+<span class="s1">                                First_name VARCHAR(20),</span>
+<span class="s1">                                Last_name VARCHAR(20),</span>
+<span class="s1">                                Password VARCHAR(50),</span>
+<span class="s1">                                PRIMARY KEY(User_id))</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="c1"># Prints that table created successfully</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">users_table</span><span class="se">\&quot;</span><span class="s2"> was created successfully&quot;</span><span class="p">)</span>
+            <span class="c1"># Prints that the table could not be created</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">users_table</span><span class="se">\&quot;</span><span class="s2"> was not created successfully&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Database_Connection.create_transactions_table">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_transactions_table">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_transactions_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a transactions table inside \&quot;user_db\&quot;, then prints out the process&quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Creates transactions table</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE transactions_table(</span>
+<span class="s1">                                Transaction_id INT(6),</span>
+<span class="s1">                                User_id INT(4),</span>
+<span class="s1">                                yyyy_mm_dd DATE,</span>
+<span class="s1">                                Income_or_expense VARCHAR(7),</span>
+<span class="s1">                                Category VARCHAR(20),</span>
+<span class="s1">                                Total DECIMAL(20,2),</span>
+<span class="s1">                                PRIMARY KEY(Transaction_id));</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="c1"># Prints that table created successfully</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">transactions_table</span><span class="se">\&quot;</span><span class="s2"> was created successfully&quot;</span><span class="p">)</span>
+            <span class="c1"># Prints that the table could not be created</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">transactions_table</span><span class="se">\&quot;</span><span class="s2"> was not created successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.create_income_expense_category_table">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_income_expense_category_table">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_income_expense_category_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a category table for income and expenses inside \&quot;user_db\&quot;, then prints the process&quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Creates income_expense_category_table</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE income_expense_category_table(</span>
+<span class="s1">                                Category_id INT(6),</span>
+<span class="s1">                                User_id INT(6),</span>
+<span class="s1">                                Income_or_expense VARCHAR(7),</span>
+<span class="s1">                                Category_Title VARCHAR(20),</span>
+<span class="s1">                                PRIMARY KEY(Category_id));</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="c1"># Prints that table created successfully</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">income_expense_category_table</span><span class="se">\&quot;</span><span class="s2"> was created successfully&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">income_expense_category_table</span><span class="se">\&quot;</span><span class="s2"> was not created successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.create_budget_table">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_budget_table">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_budget_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a budget table inside \&quot;user_db\&quot;, then prints out the process&quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Creates transactions table</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE budget_table(</span>
+<span class="s1">                                Budget_id INT(6),</span>
+<span class="s1">                                User_id INT(4),</span>
+<span class="s1">                                Category VARCHAR(20),</span>
+<span class="s1">                                Total DECIMAL(20,2),</span>
+<span class="s1">                                PRIMARY KEY(Budget_id));</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="c1"># Prints that table created successfully</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">budget_table</span><span class="se">\&quot;</span><span class="s2"> was created successfully&quot;</span><span class="p">)</span>
+            <span class="c1"># Prints that the table could not be created</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">budget_table</span><span class="se">\&quot;</span><span class="s2"> was not created successfully&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.create_financial_goals_table">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_financial_goals_table">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_financial_goals_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a financial goals table inside \&quot;user_db\&quot;, then prints out the process&quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Creates transactions table</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE financial_goals_table(</span>
+<span class="s1">                                Goal_id INT(6),</span>
+<span class="s1">                                User_id INT(4),</span>
+<span class="s1">                                Category VARCHAR(20),</span>
+<span class="s1">                                Total DECIMAL(20,2),</span>
+<span class="s1">                                PRIMARY KEY(Goal_id));</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="c1"># Prints that table created successfully</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">financial_goals_table</span><span class="se">\&quot;</span><span class="s2"> was created successfully&quot;</span><span class="p">)</span>
+            <span class="c1"># Prints that the table could not be created</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table </span><span class="se">\&quot;</span><span class="s2">financial_goals_table</span><span class="se">\&quot;</span><span class="s2"> was not created successfully&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#=====Users table section=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Contains all the methods related to the &quot;users_table&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Database_Connection.user_authenticater">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.user_authenticater">[docs]</a>
+    <span class="k">def</span> <span class="nf">user_authenticater</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a user details match</span>
+<span class="sd">        </span>
+<span class="sd">            :param string username: username</span>
+<span class="sd">            :param string password: password</span>
+
+<span class="sd">            :returns: True if user details correct, False if incorrect</span>
+<span class="sd">            :rtype: boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Execute query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM users_table</span>
+<span class="s1">                                WHERE Username = ? AND Password = ?;</span>
+<span class="s1">                                &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,))</span>
+                <span class="c1"># Gets a list of users with same details</span>
+                <span class="n">userlist</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                
+                <span class="c1"># Checks if the userlist is equal to one</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">userlist</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="c1"># Returns True</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;QUERY ERROR&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.assign_new_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.assign_new_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">assign_new_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automaticaly assign a new id to a new user, returns a number</span>
+<span class="sd">        </span>
+<span class="sd">            :rtype int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># starts id variable on &quot;1&quot;</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+            
+            <span class="c1"># continious loop till id found</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Executes query</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * FROM users_table</span>
+<span class="s2">                                    WHERE User_id = ?&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">id</span><span class="p">,))</span>
+                    <span class="c1"># Get record list</span>
+                    <span class="n">user_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+                    <span class="c1"># Checks if user_list length is 0</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error at </span><span class="se">\&quot;</span><span class="s2">assign_new_user_id</span><span class="se">\&quot;</span><span class="s2"> in database_connect&quot;</span><span class="p">)</span>
+
+            <span class="c1"># returns id</span>
+            <span class="k">return</span> <span class="nb">id</span></div>
+
+    
+
+<div class="viewcode-block" id="Database_Connection.add_user_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.add_user_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_user_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a new user record, returns True if successfully added</span>
+<span class="sd">        </span>
+<span class="sd">            :param string username: Username</span>
+<span class="sd">            :param string first_name: Users first name</span>
+<span class="sd">            :param string last_name: Users last name</span>
+<span class="sd">            :param string password: users password</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: True or False if user registered successfully</span>
+<span class="sd">        </span>
+<span class="sd">            :rtype: boolean</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># Assigns an id for the user</span>
+            <span class="n">assigned_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assign_new_user_id</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="c1"># Execute query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO users_table</span>
+<span class="s1">                                    VALUES (?, ?, ?, ?, ?)&#39;&#39;&#39;</span><span class="p">,</span> 
+                                    <span class="p">(</span><span class="n">assigned_id</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span>
+                                    <span class="n">last_name</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User added to the database&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User not successfully added to the database&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span></div>
+
+        
+
+<div class="viewcode-block" id="Database_Connection.get_user_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_user_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_user_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the user&#39;s record, and return it</span>
+<span class="sd">        </span>
+<span class="sd">            :param string username: The users&#39; usersname</span>
+<span class="sd">            :param string password: The users&#39; password</span>
+<span class="sd">            </span>
+<span class="sd">            :returns: list of the user&#39;s record details</span>
+<span class="sd">            </span>
+<span class="sd">            :rtypre: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM users_table</span>
+<span class="s1">                                WHERE Username = ? AND Password = ?&#39;&#39;&#39;</span><span class="p">,</span>
+                                <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,))</span>
+                <span class="c1"># Stores record into a list</span>
+                <span class="n">user_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">user_list</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error at </span><span class="se">\&quot;</span><span class="s2">get_user_record</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_users">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_users">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_users</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of all the users in the users_table</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: a list of all the users in the users_table</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM users_table;&#39;&#39;&#39;</span><span class="p">)</span>
+                <span class="c1"># Stores the users into a list</span>
+                <span class="n">user_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns the user list</span>
+                <span class="k">return</span> <span class="n">user_list</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User list could not be fetched. error at </span><span class="se">\&quot;</span><span class="s2">get_all_users</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.username_exists">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.username_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">username_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a specific username exists</span>
+<span class="sd">        </span>
+<span class="sd">            :param string username: The username of the user</span>
+
+<span class="sd">            :returns: True if the username exists</span>
+
+<span class="sd">            :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># default boolean value</span>
+            <span class="n">username_exist</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM users_table</span>
+<span class="s1">                                WHERE Username = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,))</span>
+                <span class="c1"># Stores user/s into a list</span>
+                <span class="n">user_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Checks if user_list is equal to zero</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">username_exist</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error at </span><span class="se">\&quot;</span><span class="s2">username_exist</span><span class="se">\&quot;</span><span class="s2"> in </span><span class="se">\&quot;</span><span class="s2">database_connect</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Returns boolean value</span>
+            <span class="k">return</span> <span class="n">username_exist</span></div>
+
+    
+
+    <span class="c1">#=====Transaction Table Section (Expenses)=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Contains all the methods conserning the Expenses of transactions_table&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Database_Connection.get_all_expenses_by_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_expenses_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all expenses by user_id, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+
+<span class="sd">            :returns: list of expenses by user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM transactions_table</span>
+<span class="s1">                               WHERE User_id = ? AND Income_or_expense = &quot;Expense&quot;</span>
+<span class="s1">                               ORDER BY yyyy_mm_dd;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Gets expense list</span>
+                <span class="n">expense_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns expense_list</span>
+                <span class="k">return</span> <span class="n">expense_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve expense records by user id&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_expenses_by_user_id_and_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id_and_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_expenses_by_user_id_and_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all expenses by user_id and category, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+<span class="sd">            :param string category: the category by which list must be fetched</span>
+
+<span class="sd">            :returns: list of expenses by user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM transactions_table</span>
+<span class="s1">                               WHERE User_id = ? </span>
+<span class="s1">                               AND Income_or_expense = &quot;Expense&quot;</span>
+<span class="s1">                               AND Category LIKE ?</span>
+<span class="s1">                               ORDER BY yyyy_mm_dd;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,))</span>
+                <span class="c1"># Gets expense list</span>
+                <span class="n">expense_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns expense_list</span>
+                <span class="k">return</span> <span class="n">expense_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve expense records by user id and category&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_expense_transaction_by_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_expense_transaction_by_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_expense_transaction_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes expense record by transaction id</span>
+<span class="sd">        </span>
+<span class="sd">            :param int transaction_id: gets the transaction id of record to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM transactions_table</span>
+<span class="s1">                               WHERE Transaction_id = ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">transaction_id</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not delete expense transaction by id&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.add_expense_transaction_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.add_expense_transaction_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_expense_transaction_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates and adds a new transaction record in transactions_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: receives the user&#39;s id</span>
+<span class="sd">            :param string date: receives the date of the transaction</span>
+<span class="sd">            :param string category: receives the expense category</span>
+<span class="sd">            :param float amoun: receives the amount of the expense</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO transactions_table</span>
+<span class="s1">                                VALUES (?, ?, ?, &quot;Expense&quot;, ?, ?);&#39;&#39;&#39;</span><span class="p">,</span>
+                                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_transaction_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">amount</span><span class="p">))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expense transaction record could not be created in transactions_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.auto_assign_transaction_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.auto_assign_transaction_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">auto_assign_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automaticaly assigns an id if it does not exist in the \&quot;transactions_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: available id number</span>
+
+<span class="sd">            :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># ID integer value starts at 1</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="c1"># While loop till id does not exist in table</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Executes query</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * FROM transactions_table</span>
+<span class="s2">                                    WHERE Transaction_id = ?;&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">id</span><span class="p">,))</span>
+                    <span class="c1"># Gets list of categories</span>
+                    <span class="n">transaction_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="c1"># Checks if category equals 0, then breaks loop if does exist</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">transaction_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># returns id</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not generate a transaction id&quot;</span><span class="p">)</span>
+                    <span class="k">break</span></div>
+
+
+
+    <span class="c1">#=====Transaction Table Section (Income)=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Contains all the methods conserning the Income of transactions_table&#39;&#39;&#39;</span>   
+
+<div class="viewcode-block" id="Database_Connection.get_all_income_by_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_income_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all income by user_id, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+
+<span class="sd">            :returns: list of income by user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM transactions_table</span>
+<span class="s1">                               WHERE User_id = ? AND Income_or_expense = &quot;Income&quot;</span>
+<span class="s1">                               ORDER BY yyyy_mm_dd;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Gets income list</span>
+                <span class="n">income_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns income_list</span>
+                <span class="k">return</span> <span class="n">income_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve income records by user id&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_income_by_user_id_and_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id_and_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_income_by_user_id_and_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all income by user_id and category, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+<span class="sd">            :param string category: the category by which list must be fetched</span>
+
+<span class="sd">            :returns: list of income by user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM transactions_table</span>
+<span class="s1">                               WHERE User_id = ? </span>
+<span class="s1">                               AND Income_or_expense = &quot;Income&quot;</span>
+<span class="s1">                               AND Category LIKE ?</span>
+<span class="s1">                               ORDER BY yyyy_mm_dd;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,))</span>
+                <span class="c1"># Gets income list</span>
+                <span class="n">income_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns income_list</span>
+                <span class="k">return</span> <span class="n">income_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve income records by user id and category&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_income_transaction_by_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_income_transaction_by_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_income_transaction_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transaction_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes income record by transaction id</span>
+<span class="sd">        </span>
+<span class="sd">            :param int transaction_id: gets the transaction id of record to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM transactions_table</span>
+<span class="s1">                               WHERE Transaction_id = ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">transaction_id</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not delete income transaction by id&quot;</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="Database_Connection.add_income_transaction_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.add_income_transaction_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_income_transaction_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates and adds a new transaction record in transactions_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: receives the user&#39;s id</span>
+<span class="sd">            :param string date: receives the date of the transaction</span>
+<span class="sd">            :param string category: receives the income category</span>
+<span class="sd">            :param float amoun: receives the amount of the income</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO transactions_table</span>
+<span class="s1">                                VALUES (?, ?, ?, &quot;Income&quot;, ?, ?);&#39;&#39;&#39;</span><span class="p">,</span>
+                                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_transaction_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">amount</span><span class="p">))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Income transaction record could not be created in transactions_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_expense_sum_of_category_and_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_expense_sum_of_category_and_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_expense_sum_of_category_and_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the sum of amount of expense records where the user_id and category match </span>
+<span class="sd">            in transactions_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: takes user&#39;s id</span>
+<span class="sd">            :param string category: takes category</span>
+
+<span class="sd">            :returns: sum of all the expenses by category and id</span>
+
+<span class="sd">            :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes cursor</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT SUM(Total) FROM transactions_table</span>
+<span class="s1">                                WHERE User_id = ?</span>
+<span class="s1">                                AND Category = ?</span>
+<span class="s1">                                And Income_or_expense = &quot;Expense&quot;&#39;&#39;&#39;</span><span class="p">,</span>
+                                <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="c1"># Gets the sum</span>
+                <span class="nb">sum</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+                <span class="k">return</span> <span class="nb">sum</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not return a sum of expenses by category from transactions_table&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#=====Category table Section=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Contains all the methods conserning the &quot;income_expense_category_table&quot;&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Database_Connection.create_new_income_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_new_income_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_new_income_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category_title</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a new income category record in the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: The user&#39;s id to who the category is related to</span>
+<span class="sd">            :param string category_title: The new name of the income category</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO income_expense_category_table</span>
+<span class="s1">                                    VALUES (?, ?, &quot;Income&quot;, ?);</span>
+<span class="s1">                                    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_category_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category_title</span><span class="p">))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new income category added&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new income category could not be added&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.create_new_expense_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.create_new_expense_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_new_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category_title</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates a new income category record in the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: The user&#39;s id to who the category is related to</span>
+<span class="sd">            :param string category_title: The new name of the expense category</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO income_expense_category_table</span>
+<span class="s1">                                    VALUES (?, ?, &quot;Expense&quot;, ?);</span>
+<span class="s1">                                    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_category_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category_title</span><span class="p">))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new expense category added&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new expense category could not be added&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_income_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_income_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_income_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes a income_category from the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :param int category_id: The id of the category to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE Category_id = ?;</span>
+<span class="s1">                                    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">category_id</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Income category removed&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Income category could not be removed&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_expense_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_expense_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes a expense_category from the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :param int category_id: The id of the category to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE Category_id = ?;</span>
+<span class="s1">                                    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">category_id</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Income category removed&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Income category could not be removed&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_expense_category_by_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_expense_category_by_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_expense_category_by_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes a expense_category from the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :param int category_id: The id of the category to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE Category_Title = ?</span>
+<span class="s1">                                    AND Income_or_expense = &quot;Expense&quot;;</span>
+<span class="s1">                                    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">category</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expense category removed&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expense category could not be removed&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.auto_assign_category_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.auto_assign_category_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">auto_assign_category_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automaticaly assigns an id if it does not exist in the \&quot;income_expense_category_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: available id number</span>
+
+<span class="sd">            :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># ID integer value starts at 1</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="c1"># While loop till id does not exist in table</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Executes query</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;SELECT * FROM income_expense_category_table</span>
+<span class="s2">                                        WHERE Category_id = ?;&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">id</span><span class="p">,))</span>
+                    <span class="c1"># Gets list of categories</span>
+                    <span class="n">category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="c1"># Checks if category equals 0, then breaks loop if does exist</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># returns id</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not generate a category id&quot;</span><span class="p">)</span>
+                    <span class="k">break</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_expense_categories">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_expense_categories">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns all the records where categories are expense</span>
+
+<span class="sd">        :param int user_id: contains the user id with what the expense are related to</span>
+
+<span class="sd">        :returns: list of expense records related to the user id</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE User_id = ? AND </span>
+<span class="s1">                                    Income_or_Expense = &quot;Expense&quot;;&#39;&#39;&#39;</span><span class="p">,</span>
+                                    <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Stores the categorie records in alist</span>
+                <span class="n">income_category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">income_category_list</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve income_category_list&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_a_expense_categories">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_a_expense_categories">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_a_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns all the records where specific category and id</span>
+
+<span class="sd">        :param int user_id: contains the user id with what the expense are related to</span>
+<span class="sd">        :param string category: uses category of expense</span>
+
+<span class="sd">        :returns: list of expense records related to the user id and category</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE User_id = ? AND </span>
+<span class="s1">                                    Income_or_expense = &quot;Expense&quot;</span>
+<span class="s1">                                    AND Category_Title = ?;&#39;&#39;&#39;</span><span class="p">,</span>
+                                    <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="c1"># Stores the categorie records in alist</span>
+                <span class="n">expense_category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">expense_category_list</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve expense_category_list&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.expense_category_exists">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.expense_category_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">expense_category_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a specific expense caegory exists</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses the user&#39;s id</span>
+<span class="sd">            :param string categor: uses the category to check if it exists</span>
+
+<span class="sd">            :returns: True if category exists, False if not</span>
+
+<span class="sd">            :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># gets list</span>
+        <span class="nb">list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_a_expense_categories</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+
+        <span class="c1"># checks if list is more than 0, return True if so.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_income_categories">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_income_categories">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_income_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;returns all the records where categories are income</span>
+
+<span class="sd">        :param int user_id: contains the user id with what the income are related to</span>
+
+<span class="sd">        :returns: list of income records related to the user id</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM income_expense_category_table</span>
+<span class="s1">                                    WHERE User_id = ? AND </span>
+<span class="s1">                                    Income_or_Expense = &quot;Income&quot;;&#39;&#39;&#39;</span><span class="p">,</span>
+                                    <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Stores the categorie records in alist</span>
+                <span class="n">income_category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">income_category_list</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve income_category_list&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#=====Budget Table Section=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This section contains all the methods related to the budget_table&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Database_Connection.budget_category_exists">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.budget_category_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">budget_category_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a budget category exists, return true if it does exist</span>
+<span class="sd">        </span>
+<span class="sd">            :param string category: the category that needs to be searched</span>
+<span class="sd">            :param int user_id: gets the user id</span>
+
+<span class="sd">            :returns: True if category exists, return False if not</span>
+
+<span class="sd">            :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates query</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM budget_table</span>
+<span class="s1">                                WHERE Category = ? </span>
+<span class="s1">                                AND User_id = ?;&#39;&#39;&#39;</span><span class="p">,(</span><span class="n">category</span><span class="p">,</span> <span class="n">user_id</span><span class="p">))</span>
+                <span class="c1"># Gets list</span>
+                <span class="n">category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns True if category_list&#39;s length more than 0, else false</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not determine if category exists in budget_table&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Database_Connection.add_budget_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.add_budget_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_budget_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">budget_amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a budget category to the budget_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: Takes the user id</span>
+<span class="sd">            :param string category: takes the category of the expense</span>
+<span class="sd">            :param float budget_amount: takes the total amount of the budget in the expense</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO budget_table</span>
+<span class="s1">                                VALUES (?, ?, ?, ?);&#39;&#39;&#39;</span><span class="p">,</span> 
+                                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_budget_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">budget_amount</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not add new budget record&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.update_budget_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.update_budget_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_budget_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">budget_amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a budget category to the budget_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: Takes the user id</span>
+<span class="sd">            :param string category: takes the category of the expense</span>
+<span class="sd">            :param float budget_amount: takes the total amount of the budget in the expense</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;UPDATE budget_table</span>
+<span class="s1">                                SET Total = ?</span>
+<span class="s1">                                WHERE User_id = ?</span>
+<span class="s1">                                AND Category = ?;&#39;&#39;&#39;</span><span class="p">,</span> 
+                                <span class="p">(</span><span class="n">budget_amount</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not update budget record&quot;</span><span class="p">)</span></div>
+
+                
+    
+<div class="viewcode-block" id="Database_Connection.get_all_budget_by_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_budget_by_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_budget_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all the budget records by user</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses the user&#39;s id</span>
+
+<span class="sd">            :returns: list of budget records of the user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM budget_table</span>
+<span class="s1">                                WHERE User_id = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Gets list</span>
+                <span class="n">budget_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns list</span>
+                <span class="k">return</span> <span class="n">budget_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not return a list from budget_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_budget_categories_by_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_budget_categories_by_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_budget_categories_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all the budget categories by id</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses user&#39;s id as key</span>
+
+<span class="sd">            :returns: a list of all records with the user&#39;s id</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens Database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM budget_table</span>
+<span class="s1">                               WHERE User_id = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Gets budget records</span>
+                <span class="n">budget_records</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">budget_records</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not return a list of all budget categories by user id from budget_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_budget_record_by_category_and_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_budget_record_by_category_and_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_budget_record_by_category_and_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes a record from the budget_table with the user id and category details</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses user&#39;s id</span>
+<span class="sd">            :param string category: uses category of the budget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM budget_table</span>
+<span class="s1">                               WHERE User_id = ?</span>
+<span class="s1">                               AND Category = ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="c1"># Commits</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not delete record from budget_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.auto_assign_budget_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.auto_assign_budget_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">auto_assign_budget_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automaticaly assigns an id if it does not exist in the \&quot;budget_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: available id number</span>
+
+<span class="sd">            :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># ID integer value starts at 1</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="c1"># While loop till id does not exist in table</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Executes query</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;SELECT * FROM budget_table</span>
+<span class="s2">                                        WHERE Budget_id = ?;&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">id</span><span class="p">,))</span>
+                    <span class="c1"># Gets list of categories</span>
+                    <span class="n">budget_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="c1"># Checks if budget equals 0, then breaks loop if does exist</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">budget_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># returns id</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not generate a budget id&quot;</span><span class="p">)</span>
+                    <span class="k">break</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.get_all_budget_by_user_id_and_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_budget_by_user_id_and_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_budget_by_user_id_and_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all budget records by user_id and category, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+<span class="sd">            :param string category: the category by which list must be fetched</span>
+
+<span class="sd">            :returns: list of budgets by user and category</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM budget_table</span>
+<span class="s1">                               WHERE User_id = ? </span>
+<span class="s1">                               AND Category LIKE ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,))</span>
+                <span class="c1"># Gets budget list</span>
+                <span class="n">budget_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns expense_list</span>
+                <span class="k">return</span> <span class="n">budget_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve budget records by user id and category&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1">#=====Financial Goals Table Section=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This section contains all the methods related to the budget_table&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Database_Connection.financial_goal_category_exists">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.financial_goal_category_exists">[docs]</a>
+    <span class="k">def</span> <span class="nf">financial_goal_category_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks wether a financial goal category exists, return true if it does exist</span>
+<span class="sd">        </span>
+<span class="sd">            :param string category: the category that needs to be searched</span>
+<span class="sd">            :param int user_id: gets the user id</span>
+
+<span class="sd">            :returns: True if category exists, return False if not</span>
+
+<span class="sd">            :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates query</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM financial_goals_table</span>
+<span class="s1">                                WHERE Category = ? </span>
+<span class="s1">                                AND User_id = ?;&#39;&#39;&#39;</span><span class="p">,(</span><span class="n">category</span><span class="p">,</span> <span class="n">user_id</span><span class="p">))</span>
+                <span class="c1"># Gets list</span>
+                <span class="n">category_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns True if category_list&#39;s length more than 0, else false</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">category_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not determine if category exists in financial_goals_table&quot;</span><span class="p">)</span></div>
+
+
+    
+<div class="viewcode-block" id="Database_Connection.add_financial_goals_record_and_maybe_expense_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.add_financial_goals_record_and_maybe_expense_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_financial_goals_record_and_maybe_expense_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">goal_amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a budget category to the budget_table, and maybe to expense category table if it does</span>
+<span class="sd">            not exist.</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: Takes the user id</span>
+<span class="sd">            :param string category: takes the category of the expense</span>
+<span class="sd">            :param float goal_amount: takes the total amount of the financial goal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;INSERT INTO financial_goals_table</span>
+<span class="s1">                                VALUES (?, ?, ?, ?);&#39;&#39;&#39;</span><span class="p">,</span> 
+                                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_assign_goal_id</span><span class="p">(),</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">goal_amount</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+                <span class="c1"># If category does not exist in expenses, create it</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expense_category_exists</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">create_new_expense_category</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not add new financial goal record&quot;</span><span class="p">)</span></div>
+
+
+            
+<div class="viewcode-block" id="Database_Connection.update_financial_goal_record">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.update_financial_goal_record">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_financial_goal_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">goal_amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a budget category to the budget_table</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: Takes the user id</span>
+<span class="sd">            :param string category: takes the category of the goal</span>
+<span class="sd">            :param float budget_amount: takes the total amount of the goal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;UPDATE financial_goals_table</span>
+<span class="s1">                                SET Total = ?</span>
+<span class="s1">                                WHERE User_id = ?</span>
+<span class="s1">                                AND Category = ?;&#39;&#39;&#39;</span><span class="p">,</span> 
+                                <span class="p">(</span><span class="n">goal_amount</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not update financial goal record&quot;</span><span class="p">)</span></div>
+
+                
+    
+<div class="viewcode-block" id="Database_Connection.get_all_financial_goals_by_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.get_all_financial_goals_by_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_all_financial_goals_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all the financial goal records by user</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses the user&#39;s id</span>
+
+<span class="sd">            :returns: list of financial goal records of the user</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM financial_goals_table</span>
+<span class="s1">                                WHERE User_id = ?&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+                <span class="c1"># Gets list</span>
+                <span class="n">goal_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns list</span>
+                <span class="k">return</span> <span class="n">goal_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not return a list from budget_table&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.delete_financial_goal_record_by_category_and_user_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.delete_financial_goal_record_by_category_and_user_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_financial_goal_record_by_category_and_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes a record from the budget_table and income_expense_category_table </span>
+<span class="sd">            with the user id and category details</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: uses user&#39;s id</span>
+<span class="sd">            :param string category: uses category of the budget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span><span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query for budget table</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;DELETE FROM financial_goals_table</span>
+<span class="s1">                               WHERE User_id = ?</span>
+<span class="s1">                               AND Category = ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">,))</span>
+                <span class="c1"># Commits</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete_expense_category_by_category</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not delete record from budget_table and income_expense_category_table&quot;</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="Database_Connection.auto_assign_goal_id">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.auto_assign_goal_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">auto_assign_goal_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automaticaly assigns an id if it does not exist in the \&quot;financial_goals_table\&quot;</span>
+<span class="sd">        </span>
+<span class="sd">            :returns: available id number</span>
+
+<span class="sd">            :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="c1"># ID integer value starts at 1</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="c1"># While loop till id does not exist in table</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Executes query</span>
+                    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;SELECT * FROM financial_goals_table</span>
+<span class="s2">                                        WHERE Goal_id = ?;&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">id</span><span class="p">,))</span>
+                    <span class="c1"># Gets list of categories</span>
+                    <span class="n">goal_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                    <span class="c1"># Checks if goal id equals 0, then breaks loop if does exist</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">goal_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># returns id</span>
+                        <span class="k">return</span> <span class="nb">id</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not generate a goal id&quot;</span><span class="p">)</span>
+                    <span class="k">break</span></div>
+
+
+
+<div class="viewcode-block" id="Database_Connection.search_all_financial_goals_by_user_id_and_category">
+<a class="viewcode-back" href="../../Business_Layer.html#Business_Layer.database_connect.Database_Connection.search_all_financial_goals_by_user_id_and_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">search_all_financial_goals_by_user_id_and_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets all financial_goal records by user_id and category, returns a list</span>
+<span class="sd">        </span>
+<span class="sd">            :param int user_id: the user&#39;s ID</span>
+<span class="sd">            :param string category: the category by which list must be fetched</span>
+
+<span class="sd">            :returns: list of financial_goals by user id and category</span>
+
+<span class="sd">            :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Opens database</span>
+        <span class="k">with</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;Database/users_db&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">db</span><span class="p">:</span>
+            <span class="c1"># Creates cursor</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Executes query</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT * FROM financial_goals_table</span>
+<span class="s1">                               WHERE User_id = ? </span>
+<span class="s1">                               AND Category LIKE ?;&#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;%</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">,))</span>
+                <span class="c1"># Gets fiancial goal list</span>
+                <span class="n">goal_list</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="c1"># Returns goal_list</span>
+                <span class="k">return</span> <span class="n">goal_list</span>
+            
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not retrieve financial goal records by user id and category&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Theuns Robert Pretorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

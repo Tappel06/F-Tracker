@@ -1,0 +1,77 @@
+Presentation_layer package
+==========================
+
+Submodules
+----------
+
+Presentation_layer.budget_menu module
+--------------------------------------
+
+.. automodule:: Presentation_layer.budget_menu
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.expenses_menu module
+---------------------------------------
+
+.. automodule:: Presentation_layer.expenses_menu
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.financial_goals_menu module
+----------------------------------------------
+
+.. automodule:: Presentation_layer.financial_goals_menu
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.income_menu module
+-------------------------------------
+
+.. automodule:: Presentation_layer.income_menu
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.main_menu module
+-----------------------------------
+
+.. automodule:: Presentation_layer.main_menu
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.shared_display module
+----------------------------------------
+
+.. automodule:: Presentation_layer.shared_display
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.user_login module
+------------------------------------
+
+.. automodule:: Presentation_layer.user_login
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Presentation_layer.user_profile module
+--------------------------------------
+
+.. automodule:: Presentation_layer.user_profile
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: Presentation_layer
+   :members:
+   :undoc-members:
+   :show-inheritance:

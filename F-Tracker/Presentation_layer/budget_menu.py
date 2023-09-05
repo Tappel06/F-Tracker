@@ -112,7 +112,7 @@ class Budget_menu(User_profile):
     
         # prints total of expenses and budget
         print(f'''--------------------------------------------------------------------------------
-{" " * 19}Total expenses: {expense_total}{" " * 10}Budget total: {budget_total}   
+{" " * 19}Total expenses: {round(expense_total, 2)}{" " * 9}Budget total: {round(budget_total, 2)}   
 ================================================================================''')
 
 
@@ -296,5 +296,5 @@ class Budget_menu(User_profile):
     
         # prints total of expenses and budget
         print(f'''--------------------------------------------------------------------------------
-{" " * 19}Total expenses: {expense_total}{" " * 10}Budget total: {budget_total}   
+{" " * 19}Total expenses: {round(expense_total, 2)}{" " * 9}Budget total: {round(budget_total, 2)}   
 ================================================================================''')

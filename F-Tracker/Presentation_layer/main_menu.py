@@ -127,10 +127,10 @@ class Main_menu(User_profile):
 
         print(f'''
 -----------------------------------------
-| Total Income: {total_income}{" " * (24 - len(str(total_income)))}|
-| Total Expenses: {total_expenses}{" " * (22 - len(str(total_expenses)))}|
+| Total Income: {round(total_income, 2)}{" " * (24 - len(str(total_income)))}|
+| Total Expenses: {round(total_expenses, 2)}{" " * (31 - len(str(total_expenses)))}|
 |---------------------------------------|
-| Balance: {total_income - total_expenses}{" " * (29 - len(str(total_income - total_expenses)))}|
+| Balance: {round(total_income - total_expenses, 2)}{" " * (38 - len(str(total_income - total_expenses)))}|
 =========================================
 ''')
         

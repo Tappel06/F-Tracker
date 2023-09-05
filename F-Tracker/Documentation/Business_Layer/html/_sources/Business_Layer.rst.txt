@@ -1,0 +1,23 @@
+Business_Layer package
+======================
+
+Submodules
+----------
+
+Business_Layer.database_connect module
+--------------------------------------
+
+.. automodule:: Business_Layer.database_connect
+    :members: 
+    :undoc-members:
+    :show-inheritance:
+
+
+
+Module contents
+---------------
+
+.. automodule:: Business_Layer
+   :members:
+   :undoc-members:
+   :show-inheritance:
