@@ -267,7 +267,7 @@ Are you sure you want to add this record? (Y/N): """)
             
         # prints the total expenses
         print(f'''================================================================================
-{" " * 55}Expense Total: {total_amount}
+{" " * 55}Expense Total: {round(total_amount, 2)}
 ================================================================================''')
             
         
@@ -331,7 +331,7 @@ Are you sure you want to add this record? (Y/N): """)
             
         # prints the total expenses
         print(f'''================================================================================
-{" " * 55}Expense Total: {total_amount}
+{" " * 55}Expense Total: {round(total_amount, 2)}
 ================================================================================''')
 
     def add_remove_expense_category(self):

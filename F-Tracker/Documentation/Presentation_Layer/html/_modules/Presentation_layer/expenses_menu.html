@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentation_layer.expenses_menu &mdash; F-Tracker 01.00.00 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=6386319a"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            F-Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Presentation_layer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">F-Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Presentation_layer.expenses_menu</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Presentation_layer.expenses_menu</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;This file contains all the code for the expenses menu&#39;&#39;&#39;</span>
+
+<span class="c1">#=====Imports=====#</span>
+<span class="sd">&#39;&#39;&#39;This section contains all the imports&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">Presentation_layer.user_profile</span> <span class="kn">import</span> <span class="n">User_profile</span>
+
+<div class="viewcode-block" id="Expenses_menu">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu">[docs]</a>
+<span class="k">class</span> <span class="nc">Expenses_menu</span><span class="p">(</span><span class="n">User_profile</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sub class of User_profile&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">user_record</span><span class="p">)</span>
+
+
+    <span class="c1">#=====Expenses Menu Methods=====#</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Coantains all the methods associated with the expenses menu&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Expenses_menu.expenses_menu_options">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.expenses_menu_options">[docs]</a>
+    <span class="k">def</span> <span class="nf">expenses_menu_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Takes the input of the expense menu options, then implements methods according to the input&quot;&quot;&quot;</span>
+        <span class="c1"># Prints the logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="c1"># Print expens menu options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span>
+
+        <span class="c1"># Loops option</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Gets option input</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Option: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># If option equals &quot;1&quot;, run &quot;add_expense&quot;</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_expense</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expens menu options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span>
+
+            <span class="c1"># Else if option equals &quot;2&quot;, run &quot;view_expense&quot;</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">view_expenses</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expens menu options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span>
+
+            <span class="c1"># Else if option equals &quot;3&quot;, run &quot;view_expense_by_category&quot;</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">view_expense_by_category</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expens menu options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span>
+
+            <span class="c1"># Else if option equals &quot;4&quot;, run &quot;add_remove_expense_category&quot;</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_remove_expense_category</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expens menu options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span>
+
+            <span class="c1"># Else if option equals &quot;5&quot;, break loop to return to previous menu</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="c1"># Else, print that incorrect option inserted</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter a given option!&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expens menu options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_menu_options</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.print_expense_menu_options">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.print_expense_menu_options">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_expense_menu_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints the expense menus&#39; options&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">1. Add expense</span>
+<span class="s1">2. View expenses</span>
+<span class="s1">3. View expenses by category</span>
+<span class="s1">4. Add or remove an expense category</span>
+<span class="s1">5. Previous menu&#39;&#39;&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.add_expense">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.add_expense">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_expense</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a new expense record&quot;&quot;&quot;</span>
+        <span class="c1"># Gets Expense Categories</span>
+        <span class="n">expense_categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Prints the logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Loop to check if a date value exist, otherwise end method</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+            <span class="c1"># Get user input for date</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date_string_creator</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="n">date</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Exit method</span>
+                <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Print logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Exits loop</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Loop Choose category</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Choose an Expense Category, or Type &quot;E&quot; to cancel:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Choose an expense category, or type </span><span class="se">\&quot;</span><span class="s2">E</span><span class="se">\&quot;</span><span class="s2"> to cancel:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># varaible containing index no.</span>
+            <span class="n">index_no</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="c1"># Prints out expense catefory</span>
+            <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">expense_categories</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">index_no</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">category</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">index_no</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="n">category_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Option: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># Checks if option is equal to &quot;E&quot;, ends method if it does</span>
+            <span class="k">if</span> <span class="n">category_input</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="c1"># Exits method</span>
+                <span class="k">return</span>
+            
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Checks if option can be casted to an integer</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">category_input</span><span class="p">):</span>
+                    <span class="c1"># If number is within index range</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">expense_categories</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">category_input</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">category_input</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">expense_categories</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="c1"># Adds new value category_String</span>
+                        <span class="n">category_string</span> <span class="o">=</span> <span class="n">expense_categories</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">category_input</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+                        <span class="c1"># Break loop</span>
+                        <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># Prints the logo</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter a given option! *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter a given option! *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Print logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="c1"># Loop Amount input</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">amount</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Insert the expense amount: &quot;</span><span class="p">))</span>
+                <span class="k">break</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># Print logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter an amount! *****&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Print logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Print confirmation input of adding the new expense record</span>
+            <span class="n">confirm</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">You are about to add the following expense record:</span><span class="se">\n</span>
+<span class="s2">Date: </span><span class="si">{</span><span class="n">date</span><span class="si">}</span>
+<span class="s2">Category: </span><span class="si">{</span><span class="n">category_string</span><span class="si">}</span>
+<span class="s2">Amount: </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span>
+
+<span class="s2">Are you sure you want to add this record? (Y/N): &quot;&quot;&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Adds record if confirm equals &quot;Y&quot;</span>
+            <span class="k">if</span> <span class="n">confirm</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">add_expense_transaction_record</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">date</span><span class="p">,</span> <span class="n">category_string</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+                <span class="k">break</span>
+
+            <span class="c1"># Else if confirm equal &quot;N&quot;, then break</span>
+            <span class="k">elif</span> <span class="n">confirm</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;N&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="c1"># Else print option was not selected</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Prints logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not select (Y/N)! *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.view_expenses">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.view_expenses">[docs]</a>
+    <span class="k">def</span> <span class="nf">view_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Displays all the expense records, and have the option to delete a record&quot;&quot;&quot;</span>
+        <span class="c1"># Prints logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="c1"># Prints Expenses</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_expenses</span><span class="p">()</span>
+
+        <span class="c1"># Print options:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">1. Delete expense by ID</span>
+<span class="s2">2. Return to previous menu&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># Options to delete expense, or return to previous menu</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Option input</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Option: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># If option equals &quot;1&quot;, run delete_expense</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete_expense</span><span class="p">()</span>
+                <span class="c1"># Prints logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Prints Expenses</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expenses</span><span class="p">()</span>
+                <span class="c1"># Print options:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">1. Delete expense by ID</span>
+<span class="s2">2. Return to previous menu&quot;&quot;&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Else if option equals &quot;2&quot;, break to go back to previous menu</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            
+            <span class="c1"># Else print given option not selected</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter a given option! *****&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.delete_expense">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.delete_expense">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_expense</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes an expense record by id&quot;&quot;&quot;</span>
+        <span class="c1"># Get expense transactions</span>
+        <span class="n">expense_transactions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expenses_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Bool to indicate if user selected correct option</span>
+            <span class="n">correct_option</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Gets input</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Enter </span><span class="se">\&quot;</span><span class="s2">E</span><span class="se">\&quot;</span><span class="s2"> to cancel</span><span class="se">\n</span><span class="s2">Transaction ID: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># Checks if &quot;E&quot; has been entered</span>
+            <span class="k">if</span> <span class="nb">id</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="c1"># Breaks loop to go to previous menu</span>
+                <span class="k">break</span>
+
+            <span class="k">for</span> <span class="n">expense</span> <span class="ow">in</span> <span class="n">expense_transactions</span><span class="p">:</span>
+                <span class="c1"># If id is equal to the expense option</span>
+                <span class="k">if</span> <span class="nb">id</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">expense</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                    <span class="c1"># Set correct_option to True</span>
+                    <span class="n">correct_option</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="c1"># Breaks for loop</span>
+                    <span class="k">break</span>
+
+            <span class="c1"># If correct option equals true</span>
+            <span class="k">if</span> <span class="n">correct_option</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Delete Record</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">delete_expense_transaction_by_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+                <span class="c1"># Break loop</span>
+                <span class="k">break</span>    </div>
+
+            
+
+<div class="viewcode-block" id="Expenses_menu.print_expenses">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.print_expenses">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_expenses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Prints a list of expenses&quot;</span>
+        <span class="c1"># Gets expense list</span>
+        <span class="n">expense_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expenses_by_user_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Variable that contains the total amount of all the expenses</span>
+        <span class="n">total_amount</span> <span class="o">=</span> <span class="mf">0.00</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All Expenses:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"> Transaction Id:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="si">}</span><span class="s1">Date:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="si">}</span><span class="s1">Category:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">26</span><span class="si">}</span><span class="s1">Amount:</span>
+<span class="s1">--------------------------------------------------------------------------------&#39;&#39;&#39;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">expense</span> <span class="ow">in</span> <span class="n">expense_list</span><span class="p">:</span>
+            <span class="c1"># adds up the total amount of expenses</span>
+            <span class="n">total_amount</span> <span class="o">+=</span> <span class="n">expense</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="c1"># Prints Expenses</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39; </span><span class="si">{</span><span class="n">expense</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">19</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expense</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">35</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">expense</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span>
+<span class="s1">--------------------------------------------------------------------------------&#39;&#39;&#39;</span><span class="p">)</span>
+            
+        <span class="c1"># prints the total expenses</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;================================================================================</span>
+<span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">55</span><span class="si">}</span><span class="s1">Expense Total: </span><span class="si">{</span><span class="n">total_amount</span><span class="si">}</span>
+<span class="s1">================================================================================&#39;&#39;&#39;</span><span class="p">)</span></div>
+
+            
+        
+<div class="viewcode-block" id="Expenses_menu.view_expense_by_category">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.view_expense_by_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">view_expense_by_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Displays all the expense records by category&quot;&quot;&quot;</span>
+        <span class="c1"># Prints logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Loops list</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Prints options</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">1. Enter category</span>
+<span class="s1">2. Return to previous menu&#39;&#39;&#39;</span><span class="p">)</span>
+            
+            <span class="c1"># Gets option input</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Option: &quot;</span><span class="p">)</span>
+            
+            <span class="c1"># If option 1 is selected</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                <span class="c1"># Prints logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># gets input for category keyword</span>
+                <span class="n">category</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Enter an expense category: &quot;</span><span class="p">)</span>
+                
+                <span class="c1"># Prints logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># prints the category list</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expenses_by_category</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+                
+
+            <span class="c1"># If option 2 is selected</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+                <span class="c1"># breaks loop to go back to previous menu</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Prints logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Print that option has not been selected</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You have not selected an option! *****&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.print_expenses_by_category">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.print_expenses_by_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_expenses_by_category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints a list by category&quot;&quot;&quot;</span>
+        <span class="c1"># Gets list</span>
+        <span class="n">category_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expenses_by_user_id_and_category</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">category</span><span class="p">)</span>
+
+        <span class="c1"># adds up the total amount of expenses</span>
+        <span class="n">total_amount</span> <span class="o">=</span> <span class="mf">0.00</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Your Expenses for this category search:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"> Transaction Id:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="si">}</span><span class="s1">Date:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="si">}</span><span class="s1">Category:</span><span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">26</span><span class="si">}</span><span class="s1">Amount:</span>
+<span class="s1">--------------------------------------------------------------------------------&#39;&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">expense</span> <span class="ow">in</span> <span class="n">category_list</span><span class="p">:</span>
+            <span class="c1"># adds up the total amount of expenses</span>
+            <span class="n">total_amount</span> <span class="o">+=</span> <span class="n">expense</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="c1"># Prints Expenses</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39; </span><span class="si">{</span><span class="n">expense</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">19</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expense</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">35</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">expense</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span><span class="si">}{</span><span class="n">expense</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span>
+<span class="s1">--------------------------------------------------------------------------------&#39;&#39;&#39;</span><span class="p">)</span>
+            
+        <span class="c1"># prints the total expenses</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;&#39;================================================================================</span>
+<span class="si">{</span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">55</span><span class="si">}</span><span class="s1">Expense Total: </span><span class="si">{</span><span class="n">total_amount</span><span class="si">}</span>
+<span class="s1">================================================================================&#39;&#39;&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Expenses_menu.add_remove_expense_category">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.add_remove_expense_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_remove_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Displays a list of current categories, and preview options to add or remove new ones&quot;&quot;&quot;</span>
+        <span class="c1"># Prints the logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="c1"># Displays all the current expense categories</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+        <span class="c1"># Prints category options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_add_remove_expense_category_options</span><span class="p">()</span>
+
+        <span class="c1"># Loops options</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># option input</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Option: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># if option equals &quot;1&quot;, run &quot;add_expense_category&quot;</span>
+            <span class="k">if</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_expense_category</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Displays all the current expense categories</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+                <span class="c1"># Prints category options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_add_remove_expense_category_options</span><span class="p">()</span>
+
+            <span class="c1"># if option equals &quot;2&quot;, run &quot;remove_expense_category&quot;</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">remove_expense_category</span><span class="p">()</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Displays all the current expense categories</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+                <span class="c1"># Prints category options</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_add_remove_expense_category_options</span><span class="p">()</span>
+
+            <span class="c1"># if option equals &quot;3&quot;, break loop to go to previous menu</span>
+            <span class="k">elif</span> <span class="n">option</span> <span class="o">==</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="c1"># else print that an option is not selected</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not enter a given option! *****&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.print_add_remove_expense_category_options">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.print_add_remove_expense_category_options">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_add_remove_expense_category_options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints the options add or remove category&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">1. Add category</span>
+<span class="s1">2. Remove Category</span>
+<span class="s1">3. Previous menu&#39;&#39;&#39;</span><span class="p">)</span></div>
+
+        
+
+<div class="viewcode-block" id="Expenses_menu.add_expense_category">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.add_expense_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a new expense category&quot;&quot;&quot;</span>
+
+        <span class="c1"># loops questions</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> 
+            <span class="c1"># Prints type &quot;E&quot; to cancel current procedure</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Type </span><span class="se">\&quot;</span><span class="s2">E</span><span class="se">\&quot;</span><span class="s2"> to cancel&quot;</span><span class="p">)</span>
+            <span class="n">category_name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the name of your new expense: &quot;</span><span class="p">)</span>
+            <span class="c1"># Checks if &quot;E&quot; is typed</span>
+            <span class="k">if</span> <span class="n">category_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">category_name</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">create_new_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">category_name</span><span class="p">)</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="c1"># Displays all the current expense categories</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** </span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s2"> added to expense categories. *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** You did not type anything! *****&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.remove_expense_category">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.remove_expense_category">[docs]</a>
+    <span class="k">def</span> <span class="nf">remove_expense_category</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes an expense Category&quot;&quot;&quot;</span>
+
+        <span class="c1"># Gets a list of all the expense categories under this user&#39;s id</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Prints the logo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="c1"># Print open space</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># Print expense categories</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+
+        <span class="c1"># loops</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+            <span class="c1"># Takes int value as input</span>
+            <span class="n">option</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Enter </span><span class="se">\&quot;</span><span class="s2">E</span><span class="se">\&quot;</span><span class="s2"> to cancel</span><span class="se">\n</span><span class="s2">Category ID: &quot;</span><span class="p">)</span>
+
+            <span class="c1"># Checks if &quot;E&quot; has been entered</span>
+            <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="k">try</span><span class="p">:</span> 
+                <span class="c1"># Checks if option can be casted</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">option</span><span class="p">):</span>
+                    <span class="c1"># Boolean value if no ID&#39;s matched</span>
+                    <span class="n">id_match</span> <span class="o">=</span> <span class="kc">False</span>
+
+                    <span class="c1"># Runs a loop to see if any id&quot;s match</span>
+                    <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+
+                        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">option</span><span class="p">)</span> <span class="o">==</span> <span class="n">category</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                            <span class="c1"># Sets id_match to True</span>
+                            <span class="n">id_match</span> <span class="o">=</span> <span class="kc">True</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">delete_expense_category</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">option</span><span class="p">))</span>
+
+                            <span class="c1"># Prints the logo</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                            <span class="c1"># Print Category removed</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** Category has been removed successfully *****&quot;</span><span class="p">)</span>
+                            <span class="c1"># Gets a list of all the expense categories under this user&#39;s id</span>
+                            <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                            <span class="c1"># Print expense categories</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+                            <span class="c1"># Break loop</span>
+                            <span class="k">break</span>
+
+                    <span class="c1"># if id_match equals False, print option not chosen</span>
+                    <span class="k">if</span> <span class="n">id_match</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                        <span class="c1"># Prints the logo</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not insert a valid ID! *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="c1"># Print expense categories</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># Prints the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">***** You did not insert a valid ID! *****</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="c1"># Print expense categories</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">print_expense_categories</span><span class="p">()</span>
+                <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="Expenses_menu.print_expense_categories">
+<a class="viewcode-back" href="../../Presentation_layer.html#Presentation_layer.expenses_menu.Expenses_menu.print_expense_categories">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prints out all the expense categories under user&#39;s id&quot;&quot;&quot;</span>
+
+        <span class="c1"># Gets a list of all the expense categories under this user&#39;s id</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_all_expense_categories</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_details</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expense categories: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prints each category</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">category</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, Name: </span><span class="si">{</span><span class="n">category</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Theuns Robert Pretorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

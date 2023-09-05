@@ -267,7 +267,7 @@ Are you sure you want to add this record? (Y/N): """)
             
         # prints the total income
         print(f'''================================================================================
-{" " * 56}Income Total: {total_amount}
+{" " * 56}Income Total: {round(total_amount, 2)}
 ================================================================================''')
             
         
@@ -331,7 +331,7 @@ Are you sure you want to add this record? (Y/N): """)
             
         # prints the total income
         print(f'''================================================================================
-{" " * 56}Income Total: {total_amount}
+{" " * 56}Income Total: {round(total_amount, 2)}
 ================================================================================''')
 
     def add_remove_income_category(self):

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business_Layer package &mdash; F-Tracker 01.00.00 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=6386319a"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Business_Layer" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            F-Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Business_Layer</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Business_Layer package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#business-layer-database-connect-module">Business_Layer.database_connect module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Business_Layer.database_connect.Database_Connection"><code class="docutils literal notranslate"><span class="pre">Database_Connection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">F-Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Business_Layer</a></li>
+      <li class="breadcrumb-item active">Business_Layer package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Business_Layer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="business-layer-package">
+<h1>Business_Layer package<a class="headerlink" href="#business-layer-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="business-layer-database-connect-module">
+<h2>Business_Layer.database_connect module<a class="headerlink" href="#business-layer-database-connect-module" title="Link to this heading"></a></h2>
+<p id="module-Business_Layer.database_connect">This file contains the class for connecting to the programs’ database, or checks wether the
+databse exists</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Business_Layer.database_connect.</span></span><span class="sig-name descname"><span class="pre">Database_Connection</span></span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.add_budget_record">
+<span class="sig-name descname"><span class="pre">add_budget_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget_amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.add_budget_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.add_budget_record" title="Link to this definition"></a></dt>
+<dd><p>Adds a budget category to the budget_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – Takes the user id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – takes the category of the expense</p></li>
+<li><p><strong>budget_amount</strong> (<em>float</em>) – takes the total amount of the budget in the expense</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.add_expense_transaction_record">
+<span class="sig-name descname"><span class="pre">add_expense_transaction_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.add_expense_transaction_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.add_expense_transaction_record" title="Link to this definition"></a></dt>
+<dd><p>Creates and adds a new transaction record in transactions_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – receives the user’s id</p></li>
+<li><p><strong>date</strong> (<em>string</em>) – receives the date of the transaction</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – receives the expense category</p></li>
+<li><p><strong>amoun</strong> (<em>float</em>) – receives the amount of the expense</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.add_financial_goals_record_and_maybe_expense_record">
+<span class="sig-name descname"><span class="pre">add_financial_goals_record_and_maybe_expense_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.add_financial_goals_record_and_maybe_expense_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.add_financial_goals_record_and_maybe_expense_record" title="Link to this definition"></a></dt>
+<dd><p>Adds a budget category to the budget_table, and maybe to expense category table if it does
+not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – Takes the user id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – takes the category of the expense</p></li>
+<li><p><strong>goal_amount</strong> (<em>float</em>) – takes the total amount of the financial goal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.add_income_transaction_record">
+<span class="sig-name descname"><span class="pre">add_income_transaction_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.add_income_transaction_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.add_income_transaction_record" title="Link to this definition"></a></dt>
+<dd><p>Creates and adds a new transaction record in transactions_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – receives the user’s id</p></li>
+<li><p><strong>date</strong> (<em>string</em>) – receives the date of the transaction</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – receives the income category</p></li>
+<li><p><strong>amoun</strong> (<em>float</em>) – receives the amount of the income</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.add_user_record">
+<span class="sig-name descname"><span class="pre">add_user_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.add_user_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.add_user_record" title="Link to this definition"></a></dt>
+<dd><p>Creates a new user record, returns True if successfully added</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – Username</p></li>
+<li><p><strong>first_name</strong> (<em>string</em>) – Users first name</p></li>
+<li><p><strong>last_name</strong> (<em>string</em>) – Users last name</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – users password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True or False if user registered successfully</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.assign_new_user_id">
+<span class="sig-name descname"><span class="pre">assign_new_user_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.assign_new_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.assign_new_user_id" title="Link to this definition"></a></dt>
+<dd><p>Automaticaly assign a new id to a new user, returns a number</p>
+<p>:rtype int</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.auto_assign_budget_id">
+<span class="sig-name descname"><span class="pre">auto_assign_budget_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.auto_assign_budget_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.auto_assign_budget_id" title="Link to this definition"></a></dt>
+<dd><p>Automaticaly assigns an id if it does not exist in the “budget_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>available id number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.auto_assign_category_id">
+<span class="sig-name descname"><span class="pre">auto_assign_category_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.auto_assign_category_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.auto_assign_category_id" title="Link to this definition"></a></dt>
+<dd><p>Automaticaly assigns an id if it does not exist in the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>available id number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.auto_assign_goal_id">
+<span class="sig-name descname"><span class="pre">auto_assign_goal_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.auto_assign_goal_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.auto_assign_goal_id" title="Link to this definition"></a></dt>
+<dd><p>Automaticaly assigns an id if it does not exist in the “financial_goals_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>available id number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.auto_assign_transaction_id">
+<span class="sig-name descname"><span class="pre">auto_assign_transaction_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.auto_assign_transaction_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.auto_assign_transaction_id" title="Link to this definition"></a></dt>
+<dd><p>Automaticaly assigns an id if it does not exist in the “transactions_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>available id number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.budget_category_exists">
+<span class="sig-name descname"><span class="pre">budget_category_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.budget_category_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.budget_category_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a budget category exists, return true if it does exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>string</em>) – the category that needs to be searched</p></li>
+<li><p><strong>user_id</strong> (<em>int</em>) – gets the user id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if category exists, return False if not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_budget_table">
+<span class="sig-name descname"><span class="pre">create_budget_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_budget_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_budget_table" title="Link to this definition"></a></dt>
+<dd><p>Creates a budget table inside “user_db”, then prints out the process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_financial_goals_table">
+<span class="sig-name descname"><span class="pre">create_financial_goals_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_financial_goals_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_financial_goals_table" title="Link to this definition"></a></dt>
+<dd><p>Creates a financial goals table inside “user_db”, then prints out the process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_income_expense_category_table">
+<span class="sig-name descname"><span class="pre">create_income_expense_category_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_income_expense_category_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_income_expense_category_table" title="Link to this definition"></a></dt>
+<dd><p>Creates a category table for income and expenses inside “user_db”, then prints the process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_new_expense_category">
+<span class="sig-name descname"><span class="pre">create_new_expense_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_new_expense_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_new_expense_category" title="Link to this definition"></a></dt>
+<dd><p>Creates a new income category record in the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – The user’s id to who the category is related to</p></li>
+<li><p><strong>category_title</strong> (<em>string</em>) – The new name of the expense category</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_new_income_category">
+<span class="sig-name descname"><span class="pre">create_new_income_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_title</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_new_income_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_new_income_category" title="Link to this definition"></a></dt>
+<dd><p>Creates a new income category record in the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – The user’s id to who the category is related to</p></li>
+<li><p><strong>category_title</strong> (<em>string</em>) – The new name of the income category</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_transactions_table">
+<span class="sig-name descname"><span class="pre">create_transactions_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_transactions_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_transactions_table" title="Link to this definition"></a></dt>
+<dd><p>Creates a transactions table inside “user_db”, then prints out the process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.create_user_table">
+<span class="sig-name descname"><span class="pre">create_user_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.create_user_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.create_user_table" title="Link to this definition"></a></dt>
+<dd><p>Creates a user table inside “user_db”, then prints out the process</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_budget_record_by_category_and_user_id">
+<span class="sig-name descname"><span class="pre">delete_budget_record_by_category_and_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_budget_record_by_category_and_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_budget_record_by_category_and_user_id" title="Link to this definition"></a></dt>
+<dd><p>Removes a record from the budget_table with the user id and category details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – uses user’s id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – uses category of the budget</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_expense_category">
+<span class="sig-name descname"><span class="pre">delete_expense_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_expense_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_expense_category" title="Link to this definition"></a></dt>
+<dd><p>Deletes a expense_category from the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<em>int</em>) – The id of the category to be deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_expense_category_by_category">
+<span class="sig-name descname"><span class="pre">delete_expense_category_by_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_expense_category_by_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_expense_category_by_category" title="Link to this definition"></a></dt>
+<dd><p>Deletes a expense_category from the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<em>int</em>) – The id of the category to be deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_expense_transaction_by_id">
+<span class="sig-name descname"><span class="pre">delete_expense_transaction_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_expense_transaction_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_expense_transaction_by_id" title="Link to this definition"></a></dt>
+<dd><p>Deletes expense record by transaction id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transaction_id</strong> (<em>int</em>) – gets the transaction id of record to be deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_financial_goal_record_by_category_and_user_id">
+<span class="sig-name descname"><span class="pre">delete_financial_goal_record_by_category_and_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_financial_goal_record_by_category_and_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_financial_goal_record_by_category_and_user_id" title="Link to this definition"></a></dt>
+<dd><p>Removes a record from the budget_table and income_expense_category_table
+with the user id and category details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – uses user’s id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – uses category of the budget</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_income_category">
+<span class="sig-name descname"><span class="pre">delete_income_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_income_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_income_category" title="Link to this definition"></a></dt>
+<dd><p>Deletes a income_category from the “income_expense_category_table”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category_id</strong> (<em>int</em>) – The id of the category to be deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.delete_income_transaction_by_id">
+<span class="sig-name descname"><span class="pre">delete_income_transaction_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transaction_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.delete_income_transaction_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.delete_income_transaction_by_id" title="Link to this definition"></a></dt>
+<dd><p>Deletes income record by transaction id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>transaction_id</strong> (<em>int</em>) – gets the transaction id of record to be deleted</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.expense_category_exists">
+<span class="sig-name descname"><span class="pre">expense_category_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.expense_category_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.expense_category_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a specific expense caegory exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – uses the user’s id</p></li>
+<li><p><strong>categor</strong> (<em>string</em>) – uses the category to check if it exists</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if category exists, False if not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.financial_goal_category_exists">
+<span class="sig-name descname"><span class="pre">financial_goal_category_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.financial_goal_category_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.financial_goal_category_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a financial goal category exists, return true if it does exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>category</strong> (<em>string</em>) – the category that needs to be searched</p></li>
+<li><p><strong>user_id</strong> (<em>int</em>) – gets the user id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if category exists, return False if not</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_a_expense_categories">
+<span class="sig-name descname"><span class="pre">get_a_expense_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_a_expense_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_a_expense_categories" title="Link to this definition"></a></dt>
+<dd><p>returns all the records where specific category and id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – contains the user id with what the expense are related to</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – uses category of expense</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of expense records related to the user id and category</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_budget_by_id">
+<span class="sig-name descname"><span class="pre">get_all_budget_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_budget_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_budget_by_id" title="Link to this definition"></a></dt>
+<dd><p>Gets all the budget records by user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – uses the user’s id</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of budget records of the user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_budget_by_user_id_and_category">
+<span class="sig-name descname"><span class="pre">get_all_budget_by_user_id_and_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_budget_by_user_id_and_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_budget_by_user_id_and_category" title="Link to this definition"></a></dt>
+<dd><p>Gets all budget records by user_id and category, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – the category by which list must be fetched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of budgets by user and category</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_budget_categories_by_user_id">
+<span class="sig-name descname"><span class="pre">get_all_budget_categories_by_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_budget_categories_by_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_budget_categories_by_user_id" title="Link to this definition"></a></dt>
+<dd><p>Gets all the budget categories by id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – uses user’s id as key</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of all records with the user’s id</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_expense_categories">
+<span class="sig-name descname"><span class="pre">get_all_expense_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_expense_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_expense_categories" title="Link to this definition"></a></dt>
+<dd><p>returns all the records where categories are expense</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – contains the user id with what the expense are related to</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of expense records related to the user id</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id">
+<span class="sig-name descname"><span class="pre">get_all_expenses_by_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_expenses_by_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id" title="Link to this definition"></a></dt>
+<dd><p>Gets all expenses by user_id, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of expenses by user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id_and_category">
+<span class="sig-name descname"><span class="pre">get_all_expenses_by_user_id_and_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_expenses_by_user_id_and_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_expenses_by_user_id_and_category" title="Link to this definition"></a></dt>
+<dd><p>Gets all expenses by user_id and category, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – the category by which list must be fetched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of expenses by user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_financial_goals_by_id">
+<span class="sig-name descname"><span class="pre">get_all_financial_goals_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_financial_goals_by_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_financial_goals_by_id" title="Link to this definition"></a></dt>
+<dd><p>Gets all the financial goal records by user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – uses the user’s id</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of financial goal records of the user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id">
+<span class="sig-name descname"><span class="pre">get_all_income_by_user_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_income_by_user_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id" title="Link to this definition"></a></dt>
+<dd><p>Gets all income by user_id, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of income by user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id_and_category">
+<span class="sig-name descname"><span class="pre">get_all_income_by_user_id_and_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_income_by_user_id_and_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_income_by_user_id_and_category" title="Link to this definition"></a></dt>
+<dd><p>Gets all income by user_id and category, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – the category by which list must be fetched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of income by user</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_income_categories">
+<span class="sig-name descname"><span class="pre">get_all_income_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_income_categories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_income_categories" title="Link to this definition"></a></dt>
+<dd><p>returns all the records where categories are income</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> (<em>int</em>) – contains the user id with what the income are related to</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of income records related to the user id</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_all_users">
+<span class="sig-name descname"><span class="pre">get_all_users</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_all_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_all_users" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of all the users in the users_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of all the users in the users_table</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_expense_sum_of_category_and_id">
+<span class="sig-name descname"><span class="pre">get_expense_sum_of_category_and_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_expense_sum_of_category_and_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_expense_sum_of_category_and_id" title="Link to this definition"></a></dt>
+<dd><p>Gets the sum of amount of expense records where the user_id and category match
+in transactions_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – takes user’s id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – takes category</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sum of all the expenses by category and id</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.get_user_record">
+<span class="sig-name descname"><span class="pre">get_user_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.get_user_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.get_user_record" title="Link to this definition"></a></dt>
+<dd><p>Gets the user’s record, and return it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – The users’ usersname</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – The users’ password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of the user’s record details</p>
+</dd>
+<dt class="field-odd">Rtypre<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.path_exists">
+<span class="sig-name descname"><span class="pre">path_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.path_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.path_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a path exists, and creates a new one if it does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.search_all_financial_goals_by_user_id_and_category">
+<span class="sig-name descname"><span class="pre">search_all_financial_goals_by_user_id_and_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.search_all_financial_goals_by_user_id_and_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.search_all_financial_goals_by_user_id_and_category" title="Link to this definition"></a></dt>
+<dd><p>Gets all financial_goal records by user_id and category, returns a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – the user’s ID</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – the category by which list must be fetched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of financial_goals by user id and category</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.tables_exist">
+<span class="sig-name descname"><span class="pre">tables_exist</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.tables_exist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.tables_exist" title="Link to this definition"></a></dt>
+<dd><p>Checks wether the “users_table” or “transactions_table” tables exist, then creates them
+if they do not exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.update_budget_record">
+<span class="sig-name descname"><span class="pre">update_budget_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">budget_amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.update_budget_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.update_budget_record" title="Link to this definition"></a></dt>
+<dd><p>Adds a budget category to the budget_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – Takes the user id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – takes the category of the expense</p></li>
+<li><p><strong>budget_amount</strong> (<em>float</em>) – takes the total amount of the budget in the expense</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.update_financial_goal_record">
+<span class="sig-name descname"><span class="pre">update_financial_goal_record</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.update_financial_goal_record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.update_financial_goal_record" title="Link to this definition"></a></dt>
+<dd><p>Adds a budget category to the budget_table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user_id</strong> (<em>int</em>) – Takes the user id</p></li>
+<li><p><strong>category</strong> (<em>string</em>) – takes the category of the goal</p></li>
+<li><p><strong>budget_amount</strong> (<em>float</em>) – takes the total amount of the goal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.user_authenticater">
+<span class="sig-name descname"><span class="pre">user_authenticater</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.user_authenticater"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.user_authenticater" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a user details match</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>string</em>) – username</p></li>
+<li><p><strong>password</strong> (<em>string</em>) – password</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if user details correct, False if incorrect</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Business_Layer.database_connect.Database_Connection.username_exists">
+<span class="sig-name descname"><span class="pre">username_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Business_Layer/database_connect.html#Database_Connection.username_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Business_Layer.database_connect.Database_Connection.username_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks wether a specific username exists</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>string</em>) – The username of the user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the username exists</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<span class="target" id="module-Business_Layer"></span></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="Business_Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Theuns Robert Pretorius.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

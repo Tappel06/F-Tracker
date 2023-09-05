@@ -112,7 +112,7 @@ class Financial_goals_menu(User_profile):
     
         # prints total of expenses and financial goal
         print(f'''--------------------------------------------------------------------------------
-{" " * 24}Total expenses: {expense_total}{" " * (14 - len(str(expense_total)))}Budget total: {budget_total}   
+{" " * 24}Total expenses: {round(expense_total, 2)}{" " * (14 - len(str(expense_total)))}Budget total: {round(budget_total, 2)}   
 ================================================================================''')
 
 
@@ -300,7 +300,7 @@ class Financial_goals_menu(User_profile):
     
         # prints total of expenses and financial goal
         print(f'''--------------------------------------------------------------------------------
-{" " * 24}Total expenses: {expense_total}{" " * (14 - len(str(expense_total)))}Budget total: {goal_total}   
+{" " * 24}Total expenses: {round(expense_total, 2)}{" " * (14 - len(str(expense_total)))}Budget total: {round(goal_total, 2)}   
 ================================================================================''')
 
             
